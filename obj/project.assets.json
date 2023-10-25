@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\Official Group Project\\Official Group Project.csproj",
-      "projectName": "Official Group Project",
-      "projectPath": "C:\\Users\\Lenovo\\Official Group Project\\Official Group Project.csproj",
+      "projectUniqueName": "C:\\Users\\Lenovo\\Official Group Project\\GroupProject.csproj",
+      "projectName": "GroupProject",
+      "projectPath": "C:\\Users\\Lenovo\\Official Group Project\\GroupProject.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Lenovo\\Official Group Project\\obj\\",
       "projectStyle": "PackageReference",
