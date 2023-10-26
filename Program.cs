@@ -67,18 +67,21 @@ class Room
     private int capacity;
 
     private bool isoccupied;
-    public int Roomnumber{
-        get{return Roomnumber;}
-        set{Roomnumber = value;}
-    }
-    public int Capacity{
-        get{return capacity;}
-        set{capacity = value;}
-    }
-    public bool Isoccupied{
-        get{return isoccupied;}
-        set{isoccupied = value;}
-    }
+    public int Roomnumber {
+    get { return roomnumber; }
+    set { roomnumber = value; }
+}
+
+    public int Capacity {
+    get { return capacity; }
+    set { capacity = value; }
+}
+
+    public bool Isoccupied {
+    get { return isoccupied; }
+    set { isoccupied = value; }
+}
+
     public Room(int roomnumber, int capacity , bool isoccupied)
     {
         Roomnumber = roomnumber;
@@ -105,7 +108,7 @@ class Room
 }
 class DoubleRoom : Room
 {
-    public DoubleRoom(int roomnumber , int capacity , bool isoccupied) : base{ roomnumber , capacity , isoccupied}
+    public DoubleRoom(int roomnumber , int capacity , bool isoccupied) : base( roomnumber , capacity , isoccupied){}
     public override void checkout(Room room)
     {
         base.checkout(room);
@@ -114,6 +117,18 @@ class DoubleRoom : Room
     {
         return base.checkin(room);
     }
+class SingleRoom : Room
+{
+    public SingleRoom(int roomnumber , int capacity , bool isoccupied) : base( roomnumber , capacity , isoccupied){}
+    public override void checkout(Room room)
+    {
+        base.checkout(room);
+    }
+    public override bool checkin(Room room)
+    {
+        return base.checkin(room);
+    } 
+}
 
 }
 class Costumer
