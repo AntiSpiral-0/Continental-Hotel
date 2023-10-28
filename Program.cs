@@ -7,9 +7,6 @@ class Hotel
 
     public string name;
     public string location;
-    private List<Room> rooms;
-    private List<Costumer> costumers;
-    public List<Review> reviews;
     public string Name{
         get{return name;}
         set{name = value;}
@@ -18,115 +15,100 @@ class Hotel
         get{return location;}
         set{location = value;}
     }
-    public List<Room> Rooms{
-        get{return rooms;}
-        set{rooms = value;}       
-    }
-    public List<Costumer> Costumers
-    {
-        get{return costumers;}
-        set{costumers = value;}
-    }
-    public List<Review> Reviews{
-        get{return reviews;}
-        set{reviews = value;}
-    }
-    public Hotel(string name , string location , List<Room> room , List<Costumer> costumer, List<Review> review )
+
+    public Hotel(string name , string location)
     {
         Name = name;
         Location = location;
-        for (int i=0; i<rooms.Count;i++)
-        {
-            this.rooms.Add(room[i]);
-        }
-        for (int i=0; i<review.Count;i++)
-        {
-            this.reviews.Add(review[i]);
-        }
-        for (int i=0; i<costumers.Count;i++)
-        {
-            this.costumers.Add(costumer[i]);
-        }
     }
-    public void AddRoom(Room room)
-    {
-        Rooms.Add(room);
-    }
-    public void AddCostumer(Costumer costumer)
-    {
-        Costumers.Add(costumer);
-    }
-    public void AddReviews(Review review)
-    {
-        Reviews.Add(review);       
-    }
+
 }
 class Room
 {
     private int roomnumber;
     private int capacity;
-
+    private List<Costumer> costumers; 
     private bool isoccupied;
+    public List<Costumer> Costumers{
+    get{return costumers;}
+    set{costumers = value;}
+    }
     public int Roomnumber {
-    get { return roomnumber; }
-    set { roomnumber = value; }
+    get { return roomnumber;}
+    set { roomnumber = value;}
 }
 
     public int Capacity {
     get { return capacity; }
-    set { capacity = value; }
-}
+    set { capacity = value;}
+    }
+    public bool Isoccupied{
+        get{return isoccupied;}
+        set{isoccupied = value;}
+    }
 
-    public bool Isoccupied {
-    get { return isoccupied; }
-    set { isoccupied = value; }
-}
 
-    public Room(int roomnumber, int capacity , bool isoccupied)
+    public Room(int roomnumber, int capacity , bool isoccupied , List<Costumer> costumer)
     {
         Roomnumber = roomnumber;
         Capacity = capacity ;
         Isoccupied = isoccupied;
-    }
-    public virtual bool checkin(Room room)
-    {
-        if(room.isoccupied == false)
+        for (int i=0; i < costumers.Count; i++)
         {
-            Console.WriteLine("This room is not occupied");
-            return true;
+            this.costumers.Add(costumer[i]);
         }
-        else
-        {
-            return false; 
-        }
+
     }
-    public virtual void checkout(Room room)
+    public void AddCostumer(Costumer costumer)
     {
-        room.isoccupied = false;
+        Costumers.Add(costumer);
+    }
+    public virtual bool checkin(Costumer costumer)
+    {
+        if(isoccupied ||Costumers.Count >= capacity)
+        {
+
+            Console.WriteLine("This room is occupied at full capacity" );
+            return false;
+        }
+        isoccupied = true;
+        costumers.Add(costumer);
+        return true;
+    }
+    public virtual void checkout(Costumer costumer)
+    {
+        if (Costumers.Contains(costumer))
+        {
+            Costumers.Remove(costumer);
+            if(Costumers.Count == 0)
+            {
+                isoccupied = false;
+            }
+        }
     }
 
 }
 class DoubleRoom : Room
 {
-    public DoubleRoom(int roomnumber , int capacity , bool isoccupied) : base( roomnumber , capacity , isoccupied){}
-    public override void checkout(Room room)
+    public DoubleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers) : base( roomnumber , capacity , isoccupied , costumers){}
+    public override void checkout(Costumer costumer)
     {
-        base.checkout(room);
+        base.checkout(costumer);
     }
-    public override bool checkin(Room room)
+    public override bool checkin(Costumer costumer)
     {
-        return base.checkin(room);
+        return base.checkin(costumer);
     }
 class SingleRoom : Room
 {
-    public SingleRoom(int roomnumber , int capacity , bool isoccupied) : base( roomnumber , capacity , isoccupied){}
-    public override void checkout(Room room)
+    public SingleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers) : base( roomnumber , capacity , isoccupied , costumers){}
+    public override void checkout(Costumer costumer)
     {
-        base.checkout(room);
+        base.checkout(costumer);
     }
-    public override bool checkin(Room room)
+    public override bool checkin(Costumer costumer)
     {
-        return base.checkin(room);
+        return base.checkin(costumer);
     } 
 }
 
@@ -136,8 +118,7 @@ class Costumer
     private int costumerId;
     private string name;
     private string contact;
-    private int days;
-
+    private List<Review> reviews;
     public int CostumerId{
         get{return costumerId;}
         set{costumerId = value;}
@@ -150,18 +131,29 @@ class Costumer
         get{return contact;}
         set{contact = value;}
     }
-    public int Days{
-        get{return days;}
-        set{days = value;}
+    public List<Review> Reviews
+    {
+        get{return reviews;}
+        set{reviews = value;}
     }
-    public Costumer(int costumerId , string name , string contact , int days)
+    public Costumer(int costumerId , string name , string contact , List<Review> review)
     {
         CostumerId = costumerId;
         Name = name;
         Contact = contact;
-        Days = days;
+        for (int i=0 ; i < review.Count; i++)
+        {
+            this.reviews.Add(review[i]);
+        }
     }
-    public virtual int billing(Costumer costumer)
+}
+class VipGuest : Costumer
+{
+    public VipGuest(int costumerId , string name , string contact , List<Review> reviews) : base (costumerId , name , contact , reviews){}
+}
+class NormalGuest : Costumer
+{
+    public NormalGuest(int costumerId , string name , string contact , List<Review> reviews) : base (costumerId , name , contact , reviews){}
 }
 class Review
 {
