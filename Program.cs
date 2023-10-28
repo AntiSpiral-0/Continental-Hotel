@@ -136,6 +136,7 @@ class Costumer
     private int costumerId;
     private string name;
     private string contact;
+    private int days;
 
     public int CostumerId{
         get{return costumerId;}
@@ -149,12 +150,18 @@ class Costumer
         get{return contact;}
         set{contact = value;}
     }
-    public Costumer(int costumerId , string name , string contact)
+    public int Days{
+        get{return days;}
+        set{days = value;}
+    }
+    public Costumer(int costumerId , string name , string contact , int days)
     {
         CostumerId = costumerId;
         Name = name;
         Contact = contact;
+        Days = days;
     }
+    public virtual int billing(Costumer costumer)
 }
 class Review
 {
