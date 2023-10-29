@@ -26,3 +26,29 @@ public class PersonManager
         costumers.Add(costumer);
     }
 }
+public class Review
+{
+    public string CostumerNum { get; set; }
+    public string Comment { get; set; }
+    public int Rating { get; set; }
+
+    public Review(string costumernum, string comment, int rating)
+    {
+        CostumerNum = costumernum;
+        Comment = comment;
+        Rating = rating;
+    }
+
+    public void DisplayReview()
+    {
+        Console.WriteLine($"User: {CostumerNum}");
+        Console.WriteLine($"Rating: {Rating} stars");
+        Console.WriteLine($"Comment: {Comment}");
+    }
+}
+public class Room
+{
+    public string CostumerNum { get; set; }
+    public string Comment { get; set; }
+    public int Rating { get; set; }
+}
