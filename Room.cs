@@ -1,35 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-class Hotel
-{
-
-    public string name;
-    public string location;
-    public string Name{
-        get{return name;}
-        set{name = value;}
-    }
-    public string Location{
-        get{return location;}
-        set{location = value;}
-    }
-
-    public Hotel(string name , string location)
-    {
-        Name = name;
-        Location = location;
-    }
-
-}
+namespace RoomManagement;
 class Room
 {
     private int roomnumber;
     private int capacity;
     private List<Costumer> costumers; 
     private bool isoccupied;
+    private double price;
     public List<Costumer> Costumers{
     get{return costumers;}
     set{costumers = value;}
@@ -43,15 +21,20 @@ class Room
     get { return capacity; }
     set { capacity = value;}
     }
+    public double Price {
+    get { return price; }
+    set { price = value;}
+    }
     public bool Isoccupied{
         get{return isoccupied;}
         set{isoccupied = value;}
     }
 
 
-    public Room(int roomnumber, int capacity , bool isoccupied , List<Costumer> costumer)
+    public Room(int roomnumber, int capacity , bool isoccupied , List<Costumer> costumer ,double price)
     {
         Roomnumber = roomnumber;
+        Price = price;
         Capacity = capacity ;
         Isoccupied = isoccupied;
         for (int i=0; i < costumers.Count; i++)
@@ -100,6 +83,7 @@ class DoubleRoom : Room
     {
         return base.checkin(costumer);
     }
+}
 class SingleRoom : Room
 {
     public SingleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers) : base( roomnumber , capacity , isoccupied , costumers){}
@@ -111,67 +95,4 @@ class SingleRoom : Room
     {
         return base.checkin(costumer);
     } 
-}
-
-}
-class Costumer
-{
-    private int costumerId;
-    private string name;
-    private string contact;
-    private List<Review> reviews;
-    public int CostumerId{
-        get{return costumerId;}
-        set{costumerId = value;}
-    }
-    public string Name{
-        get{return name;}
-        set{name = value;}
-    }
-    public string Contact{
-        get{return contact;}
-        set{contact = value;}
-    }
-    public List<Review> Reviews
-    {
-        get{return reviews;}
-        set{reviews = value;}
-    }
-    public int Days
-    {
-        get{return days;}
-        set{days = value;}
-    }
-    public double Discount
-    {
-        get{return discount;}
-        set{discount = value;}
-    }
-    public Costumer(int costumerId , string name , string contact , List<Review> review , int days , double discount)
-    {
-        CostumerId = costumerId;
-        Name = name;
-        Contact = contact;
-        Days = days;
-        Discount = discount;
-        for (int i=0 ; i < review.Count; i++)
-        {
-            this.reviews.Add(review[i]);
-        }
-    }
-    public virtual void 
-}
-class VipGuest : Costumer
-{
-  
-
-    public VipGuest(int costumerId , string name , string contact , List<Review> reviews , int days , double discount) : base (costumerId , name , contact , reviews , days , discount){}
-}
-class NormalGuest : Costumer
-{
-    public NormalGuest(int costumerId , string name , string contact , List<Review> reviews) : base (costumerId , name , contact , reviews , days , discount){}
-}
-class Review
-{
-
 }
