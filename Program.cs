@@ -45,6 +45,18 @@ public class Review
         Console.WriteLine($"Rating: {Rating} stars");
         Console.WriteLine($"Comment: {Comment}");
     }
+    
+}
+
+public class ReviewSystem
+{
+    private List<Review> reviews = new List<Review>();
+    public void AddReview(string costumernum, string comment, int rating)
+    {
+        Review review = new Review(costumernum, comment, rating);
+        reviews.Add(review);
+    }
+    
 }
 public class Room
 {
