@@ -45,22 +45,28 @@ public class Review
         Console.WriteLine($"Rating: {Rating} stars");
         Console.WriteLine($"Comment: {Comment}");
     }
-    
-}
-
-public class ReviewSystem
-{
     private List<Review> reviews = new List<Review>();
     public void AddReview(string costumernum, string comment, int rating)
     {
         Review review = new Review(costumernum, comment, rating);
         reviews.Add(review);
     }
-    
 }
+
+
 public class Room
 {
-    public string CostumerNum { get; set; }
-    public string Comment { get; set; }
-    public int Rating { get; set; }
+    public string description { get; set; }
+    public string comforts { get; set; }
+    public int roomsleft { get;set; }
+    public int size { get; set; }
+    public int priceperday { get; set; }
+    
+    Room room1 = new Room();
+    room1.description = "Double Room";
+    room1.comforts = "Air conditioning, TV, Wi-Fi";
+    room1.roomsleft = 5;
+    room1.size = 25; 
+    room1.priceperday = 100; 
+
 }
