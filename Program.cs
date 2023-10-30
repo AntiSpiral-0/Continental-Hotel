@@ -1,72 +1,89 @@
-﻿public class Costumer
+﻿public class Customer
 {
     public string Name { get; set; }
     public string PhoneNum { get; set; }
-    public int CostumerNum { get; set; }
+    public int CustomerNum { get; set; }
+    public List<Review> Reviews { get; set; }
 
-    public Costumer(string name, string phonenum, int costumernum)
+    public Customer(string name, string phonenum, int customernum)
     {
         Name = name;
         PhoneNum = phonenum;
-        CostumerNum = costumernum;
+        CustomerNum = customernum;
+        Reviews = new List<Review>();
     }
 
     public void ShowInformation()
     {
-        Console.WriteLine($"Name: {Name}, PhoneNumber: {PhoneNum} years, Costumernumber: {CostumerNum}");
+        Console.WriteLine($"Name: {Name}, PhoneNumber: {PhoneNum} years, Costumernumber: {CustomerNum}");
     }
 }
 public class PersonManager
 {
-    private List<Costumer> costumers = new List<Costumer>();
+    private List<Customer> customers = new List<Customer>();
 
-    public void AddPerson(string name,string phonenum, int costumernum)
+    public void AddPerson(string name,string phonenum, int customernum)
     {
-        Costumer costumer = new Costumer(name, phonenum, costumernum);
-        costumers.Add(costumer);
+        Customer customer = new Customer(name, phonenum, customernum);
+        customers.Add(customer);
     }
 }
 public class Review
 {
-    public string CostumerNum { get; set; }
+    public Customer Reviewer { get; set; }
     public string Comment { get; set; }
     public int Rating { get; set; }
+    
 
-    public Review(string costumernum, string comment, int rating)
+    public Review(Customer reviewer, string comment, int rating)
     {
-        CostumerNum = costumernum;
+        Reviewer = reviewer;
         Comment = comment;
         Rating = rating;
+        
     }
 
+    
     public void DisplayReview()
     {
-        Console.WriteLine($"User: {CostumerNum}");
+        Console.WriteLine($"User: {Reviewer.CustomerNum}");
         Console.WriteLine($"Rating: {Rating} stars");
         Console.WriteLine($"Comment: {Comment}");
     }
-    private List<Review> reviews = new List<Review>();
-    public void AddReview(string costumernum, string comment, int rating)
+    
+    public static Review CreateReview(Customer reviewer)
     {
-        Review review = new Review(costumernum, comment, rating);
-        reviews.Add(review);
+        
+
+        Console.Write("Enter your review comment: ");
+        string comment = Console.ReadLine();
+
+        int rating;
+        do
+        {
+            Console.Write("Enter your rating (1-5 stars): ");
+        } 
+        while (!int.TryParse(Console.ReadLine(), out rating) || rating < 1 || rating > 5);
+
+        Review newReview = new Review(reviewer, comment, rating);
+        reviewer.Reviews.Add(newReview); 
+
+        return newReview;
     }
 }
 
-
-public class Room
+class Program
 {
-    public string description { get; set; }
-    public string comforts { get; set; }
-    public int roomsleft { get;set; }
-    public int size { get; set; }
-    public int priceperday { get; set; }
-    
-    Room room1 = new Room();
-    room1.description = "Double Room";
-    room1.comforts = "Air conditioning, TV, Wi-Fi";
-    room1.roomsleft = 5;
-    room1.size = 25; 
-    room1.priceperday = 100; 
+    static void Main()
+    {
+        
+        Customer customer1 = new Customer("Alice", "123-456-7890", 748693);
+        
 
+        
+        Review userReview = Review.CreateReview(customer1);
+        
+        userReview.DisplayReview();
+        
+    }
 }
