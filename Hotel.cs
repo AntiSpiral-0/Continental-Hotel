@@ -24,7 +24,23 @@ class Hotel
 
     public void ShowCostumers(Costumer costumer)
     {
+        while 
+        {
+        Console.WriteLine("Whats your name?");
+        name = Console.ReadLine();
+
+        Random random = new Random();
         
+        int randomNumber = random.Next(1000000000, 999999999);
+        
+        }
+    }
+    public void Showrating()
+    {
+        List<Review> reviews = new List<Review>(); // Få din lista med recensioner här
+        double averageRating = Review.CalculateAverageRating(reviews);
+        Console.WriteLine("Genomsnittligt betyg: " + averageRating);
+
     }
 
 }
