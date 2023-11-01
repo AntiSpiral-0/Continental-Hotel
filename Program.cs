@@ -1,3 +1,4 @@
+﻿
 
 
 
@@ -191,6 +192,8 @@
 
 
 
+using System.Reflection.Metadata;
+using CostumerManagement;
 
 public class Customer
 {
@@ -284,7 +287,8 @@ class Program
         {
             Console.WriteLine("Thanks for the visit");
         }
-        
+
+
         
     }
 }    
