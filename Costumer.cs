@@ -49,6 +49,7 @@ class Costumer
             this.reviews.Add(review[i]);
         }
     }
+
     public virtual double Billing()
     {
         double x = 0 ;
