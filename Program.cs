@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
 
 public class Customer
@@ -96,4 +97,16 @@ class Program
         
         
     }
-}
+}    
+
+public class Hotel
+{
+    public void checkout()
+    {
+        Console.WriteLine("which booking do you want to checkout?");
+        // print list of customers
+        //give them chance to review
+        //remove them from list and make the room availble
+
+    }
+}                        
