@@ -45,19 +45,20 @@ public class Review
         return newReview;
     }
     public static double CalculateAverageRating(List<Review> reviews)
-{
-    if (reviews.Count == 0)
     {
-        return 0; // Om det inte finns några recensioner, returnera 0.
-    }
 
-    double totalRating = 0;
-    foreach (var review in reviews)
-    {
-        totalRating += review.Rating;
-    }
+        if (reviews.Count == 0)
+        {
+            return 0; // Om det inte finns några recensioner, returnera 0.
+        }
 
-    double averageRating = totalRating / reviews.Count;
-    return averageRating;
-}
+        double totalRating = 0;
+        foreach (var review in reviews)
+        {
+            totalRating += review.Rating;
+        }
+
+        double averageRating = totalRating / reviews.Count;
+        return averageRating;
+   }
 }

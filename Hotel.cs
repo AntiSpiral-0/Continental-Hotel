@@ -24,7 +24,7 @@ class Hotel
 
     public void ShowCostumers(Costumer costumer)
     {
-        while 
+        while() 
         {
         Console.WriteLine("Whats your name?");
         name = Console.ReadLine();
@@ -37,9 +37,9 @@ class Hotel
     }
     public void Showrating()
     {
-        List<Review> reviews = new List<Review>(); // Få din lista med recensioner här
+        List<Review> reviews = new List<Review>(); 
         double averageRating = Review.CalculateAverageRating(reviews);
-        Console.WriteLine("Genomsnittligt betyg: " + averageRating);
+        Console.WriteLine("Rating: " + averageRating);
 
     }
 
