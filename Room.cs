@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-// just fixing a commit problem
-namespace RoomManagement;
+namespace CostumerManagement;
 class Room
 {
     private int roomnumber;
-    private int capacity;
+    private static int capacity;
     private List<Costumer> costumers; 
     private bool isoccupied;
-    private double price;
+    private static double price;
     public List<Costumer> Costumers{
     get{return costumers;}
     set{costumers = value;}
@@ -18,11 +17,11 @@ class Room
     set { roomnumber = value;}
 }
 
-    public int Capacity {
+    public static int Capacity {
     get { return capacity; }
     set { capacity = value;}
     }
-    public double Price {
+    public static double Price {
     get { return price; }
     set { price = value;}
     }
@@ -75,7 +74,7 @@ class Room
 }
 class DoubleRoom : Room
 {
-    public DoubleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers) : base( roomnumber , capacity , isoccupied , costumers){}
+    public DoubleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers, double price) : base( roomnumber , capacity , isoccupied , costumers , price){}
     public override void checkout(Costumer costumer)
     {
         base.checkout(costumer);
@@ -87,7 +86,7 @@ class DoubleRoom : Room
 }
 class SingleRoom : Room
 {
-    public SingleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers) : base( roomnumber , capacity , isoccupied , costumers){}
+    public SingleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers , double price) : base( roomnumber , capacity , isoccupied , costumers , price){}
     public override void checkout(Costumer costumer)
     {
         base.checkout(costumer);

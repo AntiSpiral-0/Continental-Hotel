@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CostumerManagement;
 namespace HotelDisplay;
 class Hotel
 {
@@ -19,6 +20,11 @@ class Hotel
     {
         Name = name;
         Location = location;
+    }
+
+    public void ShowCostumers(Costumer costumer)
+    {
+        
     }
 
 }

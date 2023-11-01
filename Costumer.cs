@@ -51,12 +51,13 @@ class Costumer
     }
     public virtual double Billing()
     {
-        int x = 0 ;
+        double x = 0 ;
         for(int i = 0 ; i < days ; i++)
         {
-            x += 100;
+            x += Room.Price;
         }
-        return x*discount;
+        x = x * discount; 
+        return x * Room.Capacity;
     }
 }
 class VipGuest : Costumer
@@ -64,8 +65,17 @@ class VipGuest : Costumer
   
 
     public VipGuest(int costumerId , string name , string contact , List<Review> reviews , int days , double discount) : base (costumerId , name , contact , reviews , days , discount){}
+    public override double Billing()
+    {
+        return base.Billing();
+    }
 }
 class NormalGuest : Costumer
 {
     public NormalGuest(int costumerId , string name , string contact , List<Review> reviews , int days ,double discount) : base (costumerId , name , contact , reviews , days , discount){}
+    public override double Billing()
+    {
+        return base.Billing();
+    }
+
 }
