@@ -1,4 +1,7 @@
-﻿public class Customer
+﻿using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+
+public class Customer
 {
     public string Name { get; set; }
     public string PhoneNum { get; set; }
@@ -77,13 +80,20 @@ class Program
     static void Main()
     {
         
-        Customer customer1 = new Customer("Alice", "123-456-7890", 748693);
+        Customer customer = new Customer("Alice", "123-456-7890", 748693);
         
-
+        Console.WriteLine("Do you want to do a Review");
+        string x = Console.ReadLine();
+        if(x.ToLower() == "yes")
+        {
+           Review userReview = Review.CreateReview(customer);
+           
+        }
+        else
+        {
+            Console.WriteLine("Thanks for the visit");
+        }
         
-        Review userReview = Review.CreateReview(customer1);
-        
-        userReview.DisplayReview();
         
     }
 }
