@@ -1,54 +1,60 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using CostumerManagement;
-namespace HotelDisplay;
-class Hotel
+using CustomerManagement;
+
+namespace HotelDisplay
 {
+    class Hotel
+    {
+        public string name;
+        public string location;
 
-    public string name;
-    public string location;
-    public string Name
-    {
-        get { return name; }
-        set { name = value; }
-    }
-    public string Location
-    {
-        get { return location; }
-        set { location = value; }
-    }
-
-    public Hotel(string name, string location)
-    {
-        Name = name;
-        Location = location;
-    }
-
-    public void ShowCostumers(List<Room> rooms)
-    {
-        foreach (Room r in rooms)
+        public string Name
         {
-            
-            foreach (Costumer c in costumers)
+            get { return name; }
+            set { name = value; }
+        }
+
+        public string Location
+        {
+            get { return location; }
+            set { location = value; }
+        }
+
+        public Hotel(string name, string location)
+        {
+            Name = name;
+            Location = location;
+        }
+
+        public void ShowCustomers(List<Room> rooms)
+        {
+            foreach (Room r in rooms)
             {
-                Console.WriteLine($"Name {r.c.Name} CustumerId{r.c.CostumerId} Contact {r.c.Contact} Days {r.c.Days} Discount {r.c.Discount}");
+                foreach (Customer c in r.Customers) // Use r.Customers instead of Room.costumers
+                {
+                    Console.WriteLine($"Name: {c.Name} CustomerId: {c.CustomerId} Contact: {c.Contact} Days: {c.Days} Discount: {c.Discount}");
+                }
             }
         }
-    }
-    public void ShowRooms(List<Room> rooms)
-    {
-        foreach (Room room in rooms)
+
+        public void ShowReviews(List<Customer> customers) // Change costumers to customers
         {
-            Console.WriteLine($"Room Number {room.Roomnumber} Occupant(s) {room.Costumers} Occupency {room.Isoccupied} ");
+            foreach (Customer customer in customers)
+            {
+                foreach (Review review in customer.Reviews) // Use customer.Reviews instead of costumers.reviews
+                {
+                    Console.WriteLine($"the reviewer {review.Reviewer} ");
+                }
+            }
+        }
+
+        public void ShowRating()
+        {
+            List<Review> reviews = new List<Review>();
+            double averageRating = Review.CalculateAverageRating(reviews);
+            Console.WriteLine("Rating: " + averageRating);
         }
     }
-    public void ShowReviews(List<Review> reviews)
-    {
-        foreach (Review review in reviews)
-        {
-
-        }
-    }
-
 }

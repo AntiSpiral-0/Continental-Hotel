@@ -1,98 +1,115 @@
 using System;
 using System.Collections.Generic;
-namespace CostumerManagement;
-class Room
+
+namespace CustomerManagement
 {
-    private int roomnumber;
-    private static int capacity;
-    private List<Costumer> costumers; 
-    private bool isoccupied;
-    private static double price;
-    public List<Costumer> Costumers{
-    get{return costumers;}
-    set{costumers = value;}
-    }
-    public int Roomnumber {
-    get { return roomnumber;}
-    set { roomnumber = value;}
-}
-
-    public static int Capacity {
-    get { return capacity; }
-    set { capacity = value;}
-    }
-    public static double Price {
-    get { return price; }
-    set { price = value;}
-    }
-    public bool Isoccupied{
-        get{return isoccupied;}
-        set{isoccupied = value;}
-    }
-
-
-    public Room(int roomnumber, int capacity , bool isoccupied , List<Costumer> costumer ,double price)
+    class Room
     {
-        Roomnumber = roomnumber;
-        Price = price;
-        Capacity = capacity ;
-        Isoccupied = isoccupied;
-        for (int i=0; i < costumers.Count; i++)
+        private int roomnumber;
+        private static int capacity;
+        public List<Customer> customers;
+        private bool isoccupied;
+        private static double price;
+
+        public List<Customer> Customers
         {
-            this.costumers.Add(costumer[i]);
+            get { return customers; }
+            set { customers = value; }
         }
 
-    }
-    public void AddCostumer(Costumer costumer)
-    {
-        Costumers.Add(costumer);
-    }
-    public virtual bool checkin(Costumer costumer)
-    {
-        if(isoccupied ||Costumers.Count >= capacity)
+        public int Roomnumber
         {
-
-            Console.WriteLine("This room is occupied at full capacity" );
-            return false;
+            get { return roomnumber; }
+            set { roomnumber = value; }
         }
-        isoccupied = true;
-        costumers.Add(costumer);
-        return true;
-    }
-    public virtual void checkout(Costumer costumer)
-    {
-        if (Costumers.Contains(costumer))
+
+        public static int Capacity
         {
-            Costumers.Remove(costumer);
-            if(Costumers.Count == 0)
+            get { return capacity; }
+            set { capacity = value; }
+        }
+
+        public static double Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
+
+        public bool Isoccupied
+        {
+            get { return isoccupied; }
+            set { isoccupied = value; }
+        }
+
+        public Room(int roomnumber, int capacity, bool isoccupied, List<Customer> customer, double price)
+        {
+            Roomnumber = roomnumber;
+            Price = price;
+            Capacity = capacity;
+            Isoccupied = isoccupied;
+            for (int i = 0; i < customer.Count; i++)
             {
-                isoccupied = false;
+                this.customers.Add(customer[i]);
+            }
+        }
+
+        public void AddCustomer(Customer customer)
+        {
+            Customers.Add(customer);
+        }
+
+        public virtual bool checkin(Customer customer)
+        {
+            if (isoccupied || Customers.Count >= capacity)
+            {
+                Console.WriteLine("This room is occupied at full capacity");
+                return false;
+            }
+            isoccupied = true;
+            customers.Add(customer);
+            return true;
+        }
+
+        public virtual void checkout(Customer customer)
+        {
+            if (Customers.Contains(customer))
+            {
+                Customers Remove(customer);
+                if (Customers.Count == 0)
+                {
+                    isoccupied = false;
+                }
             }
         }
     }
 
-}
-class DoubleRoom : Room
-{
-    public DoubleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers, double price) : base( roomnumber , capacity , isoccupied , costumers , price){}
-    public override void checkout(Costumer costumer)
+    class DoubleRoom : Room
     {
-        base.checkout(costumer);
+        public DoubleRoom(int roomnumber, int capacity, bool isoccupied, List<Customer> customers, double price) : base(roomnumber, capacity, isoccupied, customers, price) { }
+
+        public override void checkout(Customer customer)
+        {
+            base.checkout(customer);
+        }
+
+        public override bool checkin(Customer customer)
+        {
+            return base.checkin(customer);
+        }
     }
-    public override bool checkin(Costumer costumer)
+
+    class SingleRoom : Room
     {
-        return base.checkin(costumer);
+        public SingleRoom(int roomnumber, int capacity, bool isoccupied, List<Customer> customers, double price) : base(roomnumber, capacity, isoccupied, customers, price) { }
+
+        public override void checkout(Customer customer)
+        {
+            base.checkout(customer);
+        }
+
+        public override bool checkin(Customer customer)
+        {
+            return base.checkin(customer);
+        }
     }
-}
-class SingleRoom : Room
-{
-    public SingleRoom(int roomnumber , int capacity , bool isoccupied , List<Costumer> costumers , double price) : base( roomnumber , capacity , isoccupied , costumers , price){}
-    public override void checkout(Costumer costumer)
-    {
-        base.checkout(costumer);
-    }
-    public override bool checkin(Costumer costumer)
-    {
-        return base.checkin(costumer);
-    } 
 }
