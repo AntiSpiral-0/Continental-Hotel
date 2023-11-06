@@ -49,12 +49,5 @@ namespace HotelDisplay
                 }
             }
         }
-
-        public void ShowRating()
-        {
-            List<Review> reviews = new List<Review>();
-            double averageRating = Review.CalculateAverageRating(reviews);
-            Console.WriteLine("Rating: " + averageRating);
-        }
     }
 }
