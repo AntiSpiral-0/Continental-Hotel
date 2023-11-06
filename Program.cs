@@ -11,6 +11,7 @@ class Program
         {
             System.Console.Clear();
 
+
             switch (menu_select)
             {
                 case 1:
@@ -97,7 +98,23 @@ class Program
                     Console.WriteLine("Back");
                     break;
 
-                // Add more cases as needed
+                case 3:
+                    Console.WriteLine("Customer Menu:");
+                    Console.WriteLine("Book a room");
+                    Console.WriteLine("Check in");
+                    Console.WriteLine("Check out" + "<--");
+                    Console.WriteLine("Show reviews");
+                    Console.WriteLine("Back");
+                    break;
+                
+                case 4:
+                    Console.WriteLine("Customer Menu:");
+                    Console.WriteLine("Book a room");
+                    Console.WriteLine("Check in");
+                    Console.WriteLine("Check out");
+                    Console.WriteLine("Show reviews" + "<--");
+                    Console.WriteLine("Back");
+                    break;
 
                 case 5:
                     Console.WriteLine("Customer Menu:");
