@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CustomerManagement
 {
-    public class Review
+    class Review
     {
         public Customer Reviewer { get; set; }
         public string Comment { get; set; }
