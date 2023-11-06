@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace CustomerManagement
 {
-    class Customer
+    public class Customer
     {
         private int customerId;
         private string name;

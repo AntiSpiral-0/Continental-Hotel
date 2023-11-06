@@ -33,7 +33,7 @@ namespace CustomerManagement
 
             return newReview;
         }
-    }
+    
 
     public static double CalculateAverageRating(List<Customer> customers)
     {
@@ -57,5 +57,6 @@ namespace CustomerManagement
         double averageRating = (double)totalRating / reviewCount;
         return averageRating;
     }
+}
 }
 
