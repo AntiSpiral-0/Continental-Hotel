@@ -1,37 +1,5 @@
-﻿public class Customer
-{
-    public string Name { get; set; }
-    public string PhoneNum { get; set; }
-    public int CustomerNum { get; set; }
-    public List<Review> Reviews { get; set; }
-
-    public Customer(string name, string phonenum, int customernum)
-    {
-        Name = name;
-        PhoneNum = phonenum;
-        CustomerNum = customernum;
-        Reviews = new List<Review>();
-    }
-
-    public void ShowInformation()
-    {
-        for(int i = 0; i < Reviews.Count; i++)
-        {
-        Console.WriteLine($"Name: {Name[i]}, PhoneNumber: {PhoneNum[i]} years");
-        }
-    }
-}
-public class PersonManager
-{
-    private List<Customer> customers = new List<Customer>();
-
-    public void AddPerson(string name,string phonenum, int customernum)
-    {
-        Customer customer = new Customer(name, phonenum, customernum);
-        customers.Add(customer);
-    }
-}
-
+﻿using System;
+using CustomerManagement;
 
 class Program
 {

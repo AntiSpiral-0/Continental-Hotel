@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CustomerManagement
 {
-    class Room
+    class Room 
     {
         private int roomnumber;
         private static int capacity;
@@ -74,14 +74,14 @@ namespace CustomerManagement
         {
             if (Customers.Contains(customer))
             {
-                Customers Remove(customer);
+                Customers.Remove(customer);
                 if (Customers.Count == 0)
                 {
                     isoccupied = false;
                 }
             }
         }
-    }
+}
 
     class DoubleRoom : Room
     {
