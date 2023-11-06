@@ -18,7 +18,7 @@ namespace CustomerManagement
 
         public static Review CreateReview(Customer reviewer)
         {
-            Console.Write("Enter your review comment: ");
+            Console.Write("Enter your review comment:");
             string comment = Console.ReadLine();
 
             int rating;
