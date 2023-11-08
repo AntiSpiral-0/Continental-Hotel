@@ -53,6 +53,12 @@ namespace CustomerManagement
             }
         }
 
+        public Room(int roomnumber, int capacity1, bool v, int price1, List<Customer> customers)
+        {
+            this.roomnumber = roomnumber;
+            this.customers = customers;
+        }
+
         public void AddCustomer(Customer customer)
         {
             Customers.Add(customer);
