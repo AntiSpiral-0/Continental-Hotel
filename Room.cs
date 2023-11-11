@@ -6,7 +6,7 @@ namespace CustomerManagement
     class Room 
     {
         private int roomnumber;
-        private static int capacity;
+        public static int capacity;
         public List<Customer> customers;
         private bool isoccupied;
         private static double price;
@@ -53,11 +53,6 @@ namespace CustomerManagement
             }
         }
 
-        public Room(int roomnumber, int capacity1, bool v, int price1, List<Customer> customers)
-        {
-            this.roomnumber = roomnumber;
-            this.customers = customers;
-        }
 
         public void AddCustomer(Customer customer)
         {
@@ -93,6 +88,7 @@ namespace CustomerManagement
     {
         public DoubleRoom(int roomnumber, int capacity, bool isoccupied, List<Customer> customers, double price) : base(roomnumber, capacity, isoccupied, customers, price) { }
 
+  
         public override void checkout(Customer customer)
         {
             base.checkout(customer);

@@ -64,7 +64,7 @@ namespace CustomerManagement
         static void CustomerMenu()
         {
             int customerMenuSelect = 1;
-            List<string> customerOptions = new List<string> { "Customer Menu:", "Book a room", "Check in", "Check out", "Show reviews","Show Custumers" ,"Back" };
+            List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out", "Show reviews", "Show Custumers", "Back" };
 
             while (true)
             {
@@ -85,11 +85,11 @@ namespace CustomerManagement
                 {
                     if (customerMenuSelect == 1)
                     {
-                        // "Book a room" option
+
                     }
                     else if (customerMenuSelect == 2)
                     {
-                        //"Check in" option
+                        //"Check out" option
                     }
                     else if (customerMenuSelect == 3)
                     {
@@ -103,92 +103,126 @@ namespace CustomerManagement
                     {
                         //"Show reviews" option
                     }
-                    else if (customerMenuSelect == 6)
+                }
+            }
+        }
+        static void RoomMenu()
+        {
+            int RoomMenuSelect = 1;
+            List<string> RoomOptions = new List<string> { "Rooms Options", "Add a Room", "Remove a Room", "Show Rooms", "Quit" };
+            List<Room> rooms = new List<Room>();
+
+            while (true)
+            {
+                Console.Clear();
+                DisplayMenu(RoomOptions, RoomMenuSelect);
+                ConsoleKeyInfo RoomKey = Console.ReadKey();
+
+                if (RoomKey.Key == ConsoleKey.DownArrow)
+                {
+                    RoomMenuSelect = Math.Min(RoomMenuSelect + 1, RoomOptions.Count - 1);
+                }
+                else if (RoomKey.Key == ConsoleKey.UpArrow)
+                {
+                    RoomMenuSelect = Math.Max(RoomMenuSelect - 1, 1);
+                }
+                else if (RoomKey.Key == ConsoleKey.Enter)
+                {
+                    if (RoomMenuSelect == 1)
+                    {
+                        Console.WriteLine("Select Normal if you want a Normal Room Or Double if you want a Double Room");
+                        string choice = Console.ReadLine();
+                        if (choice.ToUpper() == "DOUBLE")
+                        {
+                            Console.WriteLine("Enter room number (3 digits): ");
+                            if (int.TryParse(Console.ReadLine(), out int roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+                            {
+                                Console.WriteLine("Enter room capacity (less than or equals to 6): ");
+                                if (int.TryParse(Console.ReadLine(), out int capacity) && capacity <= 6)
+                                {
+                                    Console.WriteLine("Enter room price (less than 500): ");
+                                    if (int.TryParse(Console.ReadLine(), out int price) && price < 500)
+                                    {
+                                        DoubleRoom newRoom = new DoubleRoom(roomnumber, capacity, false, new List<Customer>(), price);
+                                        rooms.Add(newRoom);
+                                        Console.WriteLine("Room added successfully.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid price input. Price should be less than 500.");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+                            }
+                        }
+                        else if (choice.ToUpper() == "Normal")
+                        {
+                            Console.WriteLine("Enter room number (3 digits): ");
+                            if (int.TryParse(Console.ReadLine(), out int roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+                            {
+                                Console.WriteLine("Enter room capacity (less than or equals to 3): ");
+                                if (int.TryParse(Console.ReadLine(), out int capacity) && capacity < 3)
+                                {
+                                    Console.WriteLine("Enter room price (less than or equals to 250): ");
+                                    if (int.TryParse(Console.ReadLine(), out int price) && price <= 250)
+                                    {
+                                        Room newRoom = new Room(roomnumber, capacity, false, new List<Customer>(), price);
+                                        rooms.Add(newRoom);
+                                        Console.WriteLine("Room added successfully.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid price input. Price should be less than 500.");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+                            }
+                        }
+                    }
+                    else if (RoomMenuSelect == 2)
+                    {
+                        Console.WriteLine("Please Write the number of the room you would like to remove");
+                        int number = Convert.ToInt32(Console.ReadLine());
+                        foreach (Room room in rooms)
+                        {
+                            if (room.Roomnumber == number)
+                            {
+                                rooms.Remove(room);
+                            }
+                            else
+                            {
+                                Console.WriteLine("room was not found !");
+                            }
+                        }
+                    }
+                    else if (RoomMenuSelect == 3)
+                    {
+                        foreach (Room room in rooms)
+                        {
+                            Console.WriteLine($" RoomNumber{room.Roomnumber} Capacity{room.capacity} Occupiancy{room.Isoccupied} Customers{room.Customers}");
+                        }
+                    }
+                    else if (RoomMenuSelect == 4)
                     {
                         return;
                     }
                 }
             }
         }
-static void RoomMenu()
-{
-    int RoomMenuSelect = 1;
-    List<string> RoomOptions = new List<string> { "Rooms Options", "Add a Room", "Remove a Room", "Show Rooms", "Quit" };
-    List<Room> rooms = new List<Room>();
-
-    while (true)
-    {
-        Console.Clear();
-        DisplayMenu(RoomOptions, RoomMenuSelect);
-        ConsoleKeyInfo RoomKey = Console.ReadKey();
-
-        if (RoomKey.Key == ConsoleKey.DownArrow)
-        {
-            RoomMenuSelect = Math.Min(RoomMenuSelect + 1, RoomOptions.Count - 1);
-        }
-        else if (RoomKey.Key == ConsoleKey.UpArrow)
-        {
-            RoomMenuSelect = Math.Max(RoomMenuSelect - 1, 1);
-        }
-        else if (RoomKey.Key == ConsoleKey.Enter)
-        {
-            if (RoomMenuSelect == 1)
-            {
-                Console.WriteLine("Enter room number (3 digits): ");
-                if (int.TryParse(Console.ReadLine(), out int roomnumber) && roomnumber >= 100 && roomnumber <= 999)
-                {
-                    Console.WriteLine("Enter room capacity (less than 8): ");
-                    if (int.TryParse(Console.ReadLine(), out int capacity) && capacity < 8)
-                    {
-                        Console.WriteLine("Enter room price (less than 500): ");
-                        if (int.TryParse(Console.ReadLine(), out int price) && price < 500)
-                        {
-                            Room newRoom = new Room(roomnumber, capacity, false, price, new List<Customer>());
-                            rooms.Add(newRoom);
-                            Console.WriteLine("Room added successfully.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid price input. Price should be less than 500.");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
-                }
-            }
-            else if (RoomMenuSelect == 2)
-            {
-                Console.WriteLine("Please Write the number of the room you would like to remove");
-                int number = Convert.ToInt32(Console.ReadLine());
-                foreach(Room room in rooms)
-                {
-                    if (room.Roomnumber == number)
-                    {
-                      rooms.Remove(room);  
-                    }
-                    else
-                    {
-                        Console.WriteLine("room was not found !");
-                    }
-                }
-            }
-            else if (RoomMenuSelect == 3)
-            {
-                
-            }
-            else if (RoomMenuSelect == 4)
-            {
-                return;
-            }
-        }
-    }
-}
 
     }
 }
