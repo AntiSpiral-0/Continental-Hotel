@@ -47,13 +47,12 @@ namespace CustomerManagement
             Price = price;
             Capacity = capacity;
             Isoccupied = isoccupied;
+            customers = new List<Customer>();
             for (int i = 0; i < customer.Count; i++)
             {
                 this.customers.Add(customer[i]);
             }
         }
-
-
         public void AddCustomer(Customer customer)
         {
             Customers.Add(customer);

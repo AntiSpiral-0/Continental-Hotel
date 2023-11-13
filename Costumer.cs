@@ -8,7 +8,7 @@ namespace CustomerManagement
     {
         private int customerId;
         private string name;
-        private string contact;
+        private int contact;
         private List<Review> reviews;
         private int days;
         private double discount;
@@ -25,7 +25,7 @@ namespace CustomerManagement
             set { name = value; }
         }
 
-        public string Contact
+        public int Contact
         {
             get { return contact; }
             set { contact = value; }
@@ -49,17 +49,18 @@ namespace CustomerManagement
             set { discount = value; }
         }
 
-        public Customer(int customerId, string name, string contact, List<Review> review, int days, double discount)
+        public Customer(int customerId, string name, int contact, List<Review> review, int days, double discount)
         {
-            CustomerId = customerId;
-            Name = name;
-            Contact = contact;
-            Days = days;
-            Discount = discount;
-            for (int i = 0; i < review.Count; i++)
-            {
-                this.reviews.Add(review[i]);
-            }
+        CustomerId = customerId;
+        Name = name;
+        Contact = contact;
+        Days = days;
+        Discount = discount;
+        reviews = new List<Review>(); 
+        for (int i = 0; i < review.Count; i++)
+        {
+            this.reviews.Add(review[i]);
+        }
         }
 
         public virtual double Billing()
@@ -76,7 +77,7 @@ namespace CustomerManagement
 
     class VipGuest : Customer
     {
-        public VipGuest(int customerId, string name, string contact, List<Review> reviews, int days, double discount) : base(customerId, name, contact, reviews, days, discount) { }
+        public VipGuest(int customerId, string name, int contact, List<Review> reviews, int days, double discount) : base(customerId, name, contact, reviews, days, discount) { }
 
         public override double Billing()
         {
@@ -86,7 +87,7 @@ namespace CustomerManagement
 
     class NormalGuest : Customer
     {
-        public NormalGuest(int customerId, string name, string contact, List<Review> reviews, int days, double discount) : base(customerId, name, contact, reviews, days, discount) { }
+        public NormalGuest(int customerId, string name, int contact, List<Review> reviews, int days, double discount) : base(customerId, name, contact, reviews, days, discount) { }
 
         public override double Billing()
         {
