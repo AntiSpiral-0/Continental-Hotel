@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-
+using System.IO;
+using System.Text.Json;
 using CustomerManagement;
 using HotelDisplay;
 
 class Program
 {
-    static List<Customer> customers = new List<Customer>();
-    static List<Room> rooms = new List<Room>();
+    public static List<Customer> customers = new List<Customer>();
+    public static List<Room> rooms = new List<Room>();
+
     static void Main()
     {
+        JsonHandler.LoadCustomersAndRooms();
+
         int menuSelect = 1;
         List<string> options = new List<string> { "Select an Option:", "Customer", "Rooms", "Quit" };
 
@@ -41,6 +44,7 @@ class Program
                 }
                 else if (menuSelect == 3)
                 {
+                    JsonHandler.SaveCustomersAndRooms();
                     return;
                 }
             }
@@ -65,7 +69,6 @@ class Program
     static void CustomerMenu()
     {
         int customerMenuSelect = 1;
-
         List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out", "Show reviews", "Show Customers", "Back" };
 
         while (true)
@@ -153,27 +156,25 @@ class Program
                         }
                     }
                 }
-            
-                    else if (customerMenuSelect == 2)
-                    {
-                        // Handle check out logic
-                    }
-                    else if (customerMenuSelect == 3)
-                    {
-                        // Handle show reviews logic
-                    }
-                    else if (customerMenuSelect == 4)
-                    {
-                        // Handle show customers logic
-                    }
-                    else if (customerMenuSelect == 5)
-                    {
-                        return;
-                    }
+                else if (customerMenuSelect == 2)
+                {
+                    // Handle check out logic
+                }
+                else if (customerMenuSelect == 3)
+                {
+                    // Handle show reviews logic
+                }
+                else if (customerMenuSelect == 4)
+                {
+                    // Handle show customers logic
+                }
+                else if (customerMenuSelect == 5)
+                {
+                    return;
                 }
             }
         }
-    
+    }
 
     static void AddDoubleRoom(List<Room> rooms)
     {
@@ -302,8 +303,39 @@ class Program
                     return;
                 }
             }
+            JsonHandler.SaveCustomersAndRooms();
         }
     }
 }
 
+public static class JsonHandler
+{
+    public static void SaveCustomersAndRooms()
+    {
+        SaveToJson("customers.json", Program.customers);
+        SaveToJson("rooms.json", Program.rooms);
+    }
 
+    public static void LoadCustomersAndRooms()
+    {
+        Program.customers = LoadFromJson<Customer>("customers.json");
+        Program.rooms = LoadFromJson<Room>("rooms.json");
+    }
+
+    public static void SaveToJson<T>(string filePath, List<T> data)
+    {
+        string jsonData = JsonSerializer.Serialize(data);
+        File.WriteAllText(filePath, jsonData);
+    }
+
+    public static List<T> LoadFromJson<T>(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            string jsonData = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<T>>(jsonData);
+        }
+
+        return new List<T>();
+    }
+}
