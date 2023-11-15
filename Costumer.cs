@@ -54,6 +54,7 @@ namespace CustomerManagement
             }
         }
     }
+    JsonHandler.SaveCustomersAndRooms();
 }
         private int customerId;
         private string name;

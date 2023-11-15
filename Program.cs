@@ -98,7 +98,7 @@ class Program
                 if (customerMenuSelect == 1)
                 {
                     Customer.AddCustomer(customers, rooms);
-                    JsonHandler.SaveCustomersAndRooms();
+                    
                 }
 
             
