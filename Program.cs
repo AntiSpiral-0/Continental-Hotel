@@ -120,7 +120,6 @@ class Program
                                     {
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
-                                            rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
                                             Console.ReadKey();
@@ -153,7 +152,6 @@ class Program
                                     {
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
-                                            rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
                                             Console.ReadKey();
