@@ -27,7 +27,7 @@ namespace HotelDisplay
             Location = location;
         }
 
-    public void ShowCustomers(List<Room> rooms)
+    public static void ShowCustomers(List<Room> rooms)
     {
         foreach (Room r in rooms)
         {
@@ -38,7 +38,7 @@ namespace HotelDisplay
         }
     }
 
-    public void ShowReviews(List<Customer> customers)
+    public static void ShowReviews(List<Customer> customers)
     {
         foreach (Customer customer in customers)
         {

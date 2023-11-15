@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 
 using CustomerManagement;
@@ -9,6 +10,7 @@ class Program
 {
     static List<Customer> customers = new List<Customer>();
     static List<Room> rooms = new List<Room>();
+    static List<Review> reviews = new List<Review>();
     static void Main()
     {
         int menuSelect = 1;
@@ -66,7 +68,7 @@ class Program
     {
         int customerMenuSelect = 1;
 
-        List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out", "Show reviews", "Show Customers", "Back" };
+        List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out","Make a review", "Show reviews", "Show Customers", "Back" };
 
         while (true)
         {
@@ -87,7 +89,7 @@ class Program
             {
                 if (customerMenuSelect == 1)
                 {
-                    Console.WriteLine("Choose the type of customer");
+                    Console.WriteLine("Choose the type of customer Normal/VIP");
                     string Cus = Console.ReadLine();
                     if (Cus.ToUpper() == "NORMAL")
                     {
@@ -97,10 +99,10 @@ class Program
                         if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
                         {
                             Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 8)
+                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont >= 10000000)
                             {
                                 Console.WriteLine("Enter the number of days");
-                                if (int.TryParse(Console.ReadLine(), out int days) && days < 365)
+                                if (int.TryParse(Console.ReadLine(), out int days) && days <= 365)
                                 {
                                     NormalGuest guest = new NormalGuest(custId, Name, cont, new List<Review>(), days, 1);
                                     customers.Add(guest);
@@ -122,13 +124,13 @@ class Program
                     }
                     else
                     {
-                        Console.WriteLine("Write the name of the customer");
+                        Console.WriteLine("Write the name of the customer Normal/VIP");
                         string Name = Console.ReadLine();
                         Console.WriteLine("Enter Customer ID (4 digits): ");
                         if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
                         {
                             Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 8)
+                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont <= 10000000)
                             {
                                 Console.WriteLine("Enter the number of days");
                                 if (int.TryParse(Console.ReadLine(), out int days) && days < 365)
@@ -156,17 +158,47 @@ class Program
             
                     else if (customerMenuSelect == 2)
                     {
-                        // Handle check out logic
+                        Console.WriteLine("Choose the customer checking out");
+                        int id = Convert.ToInt32(Console.ReadLine());
+                        foreach(Room room in rooms)
+                        {
+                            foreach(Customer customer in customers)
+                            {
+                                if (id == customer.CustomerId)
+                                {
+                                    customers.Remove(customer);
+                                    Console.WriteLine("Customer has been removed");
+                                }
+                            }
+                        }
                     }
                     else if (customerMenuSelect == 3)
                     {
-                        // Handle show reviews logic
+                        Console.WriteLine("Specify Which Customer is making the review");
+                        int Reviewer = Convert.ToInt32(Console.ReadLine());
+                        foreach(Room room in rooms)
+                        {
+                            foreach(Customer customer in customers)
+                            {
+                                if(Reviewer == customer.CustomerId)
+                                {
+                                    Console.WriteLine("Write the review here");
+                                    Review.CreateReview(customer);
+                                }
+                            }
+                        Console.WriteLine("Average review of the hotel is");
+                        Console.WriteLine(Review.CalculateAverageRating(room.Customers));
+                        }
                     }
                     else if (customerMenuSelect == 4)
                     {
-                        // Handle show customers logic
+                        Hotel.ShowReviews(customers);
                     }
                     else if (customerMenuSelect == 5)
+                    {
+                        Hotel.ShowCustomers(rooms);
+                    }
+                    else if (customerMenuSelect == 6)
                     {
                         return;
                     }
@@ -184,7 +216,7 @@ class Program
             if (int.TryParse(Console.ReadLine(), out int capacity) && capacity <= 6)
             {
                 Console.WriteLine("Enter room price (less than 500): ");
-                if (int.TryParse(Console.ReadLine(), out int price) && price < 500)
+                if (int.TryParse(Console.ReadLine(), out int price) && price <= 500)
                 {
                     DoubleRoom newRoom = new DoubleRoom(roomnumber, capacity, false, new List<Customer>(), price);
                     rooms.Add(newRoom);

@@ -62,12 +62,12 @@ namespace CustomerManagement
         {
             if (isoccupied || Customers.Count >= capacity)
             {
-                Console.WriteLine("This room is occupied at full capacity");
-                return false;
+                Customers.Add(customer);
+                Isoccupied = true;
+                return true;
             }
-            isoccupied = true;
-            customers.Add(customer);
-            return true;
+            Console.WriteLine("Room is either occupied or at full capacity.");
+            return false;
         }
 
         public virtual void checkout(Customer customer)
