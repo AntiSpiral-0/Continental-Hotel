@@ -122,12 +122,14 @@ class Program
                                             rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
+                                            Console.ReadKey();
                                             break;
                                         }
                                     }
                                 }
                             }
                         }
+
                     }
                     else
                     {
@@ -137,7 +139,7 @@ class Program
                         if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
                         {
                             Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont <= 10000000)
+                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont >= 10000000)
                             {
                                 Console.WriteLine("Enter the number of days");
                                 if (int.TryParse(Console.ReadLine(), out int days) && days < 365)
@@ -153,10 +155,10 @@ class Program
                                             rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
+                                            Console.ReadKey();
                                             break;
                                         }
                                     }
-
                                 }
                             }
                         }
@@ -176,6 +178,7 @@ class Program
                                 {
                                     customers.Remove(customer);
                                     Console.WriteLine("Customer has been removed");
+                                    Console.ReadKey();
                                 }
                             }
                         }
@@ -201,10 +204,12 @@ class Program
                     else if (customerMenuSelect == 4)
                     {
                         Hotel.ShowReviews(customers);
+                        Console.ReadKey();
                     }
                     else if (customerMenuSelect == 5)
                     {
                         Hotel.ShowCustomers(rooms);
+                        Console.ReadKey();
                     }
                     else if (customerMenuSelect == 6)
                     {
@@ -230,20 +235,25 @@ class Program
                     DoubleRoom newRoom = new DoubleRoom(roomnumber, capacity, false, new List<Customer>(), price);
                     rooms.Add(newRoom);
                     Console.WriteLine("Room added successfully.");
+                    Console.ReadKey();
                 }
                 else
                 {
                     Console.WriteLine("Invalid price input. Price should be less than 500.");
+                    Console.ReadKey();
+                    
                 }
             }
             else
             {
                 Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
+                Console.ReadKey();
             }
         }
         else
         {
             Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+            Console.ReadKey();
         }
     }
 
@@ -261,20 +271,24 @@ class Program
                     SingleRoom newRoom = new SingleRoom(roomnumber, capacity, false, new List<Customer>(), price);
                     rooms.Add(newRoom);
                     Console.WriteLine("Room added successfully.");
+                    Console.ReadKey();
                 }
                 else
                 {
                     Console.WriteLine("Invalid price input. Price should be less than 500.");
+                    Console.ReadKey();
                 }
             }
             else
             {
                 Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
+                Console.ReadKey();
             }
         }
         else
         {
             Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+            Console.ReadKey();
         }
     }
 
@@ -321,6 +335,8 @@ class Program
                         if (room.Roomnumber == number)
                         {
                             rooms.Remove(room);
+                            Console.WriteLine("room removed");
+                            Console.ReadKey();
                             break;
                         }
                     }
@@ -335,8 +351,10 @@ class Program
                         foreach (Customer customer in room.Customers)
                         {
                             Console.WriteLine($"   Name: {customer.Name}, Contact: {customer.Contact}");
+                           
                         }
                     }
+                    Console.ReadKey();
                 }
                 else if (RoomMenuSelect == 4)
                 {
