@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using CustomerManagement;
 using HotelDisplay;
@@ -96,73 +97,8 @@ class Program
             {
                 if (customerMenuSelect == 1)
                 {
-                    Console.WriteLine("Choose the type of customer Normal/VIP");
-                    string Cus = Console.ReadLine();
-                    if (Cus.ToUpper() == "NORMAL")
-                    {
-                        Console.WriteLine("Write the name of the customer");
-                        string Name = Console.ReadLine();
-                        Console.WriteLine("Enter Customer ID (4 digits): ");
-                        if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
-                        {
-                            Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont >= 10000000)
-                            {
-                                Console.WriteLine("Enter the number of days");
-                                if (int.TryParse(Console.ReadLine(), out int days) && days <= 365)
-                                {
-                                    NormalGuest guest = new NormalGuest(custId, Name, cont, new List<Review>(), days, 1);
-                                    customers.Add(guest);
-                                    Console.WriteLine("Please Choose a room");
-                                    int roomid = Convert.ToInt32(Console.ReadLine());
-                                    for (int i = 0; i < rooms.Count; i++)
-                                    {
-                                        if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
-                                        {
-                                            rooms[i].AddCustomer(guest);
-                                            Console.WriteLine("Here's the total for the customer's stay");
-                                            Console.WriteLine(guest.Billing());
-                                            Console.ReadKey();
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Write the name of the customer Normal/VIP");
-                        string Name = Console.ReadLine();
-                        Console.WriteLine("Enter Customer ID (4 digits): ");
-                        if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
-                        {
-                            Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont >= 10000000)
-                            {
-                                Console.WriteLine("Enter the number of days");
-                                if (int.TryParse(Console.ReadLine(), out int days) && days < 365)
-                                {
-                                    NormalGuest guest = new NormalGuest(custId, Name, cont, new List<Review>(), days, 0.2);
-                                    customers.Add(guest);
-                                    Console.WriteLine("Please Choose a room");
-                                    int roomid = Convert.ToInt32(Console.ReadLine());
-                                    for (int i = 0; i < rooms.Count; i++)
-                                    {
-                                        if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
-                                        {
-                                            rooms[i].AddCustomer(guest);
-                                            Console.WriteLine("Here's the total for the customer's stay");
-                                            Console.WriteLine(guest.Billing());
-                                            Console.ReadKey();
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    Customer.AddCustomer(customers, rooms);
+                    JsonHandler.SaveCustomersAndRooms();
                 }
 
             
