@@ -44,7 +44,7 @@ namespace HotelDisplay
         {
             foreach (Review review in customer.Reviews)
             {
-                Console.WriteLine($"the reviewer {review.Reviewer.Name} ");
+                Console.WriteLine($"the reviewer :{review.Reviewer.Name} Comment : {review.Comment} Rating : {review.Rating}");
             }
         }
     }

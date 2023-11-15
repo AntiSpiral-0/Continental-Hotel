@@ -60,7 +60,7 @@ namespace CustomerManagement
 
         public virtual bool checkin(Customer customer)
         {
-            if (isoccupied || Customers.Count >= capacity)
+            if (isoccupied || Customers.Count < capacity)
             {
                 Customers.Add(customer);
                 Isoccupied = true;
@@ -79,6 +79,8 @@ namespace CustomerManagement
                 {
                     isoccupied = false;
                 }
+                Console.WriteLine("Customer is removed");
+                return;
             }
         }
 }

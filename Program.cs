@@ -119,7 +119,7 @@ class Program
                                     {
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
-                                            rooms[i].AddCustomer(guest);
+                                            //rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
                                             Console.ReadKey();
@@ -152,13 +152,14 @@ class Program
                                     {
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
-                                            rooms[i].AddCustomer(guest);
+                                            //rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
                                             Console.ReadKey();
                                             break;
                                         }
                                     }
+                                    Console.ReadKey();
                                 }
                             }
                         }
@@ -175,12 +176,9 @@ class Program
                             foreach(Customer customer in customers)
                             {
                                 if (id == customer.CustomerId)
-                                {
-                                    customers.Remove(customer);
-                                    Console.WriteLine("Customer has been removed");
-                                    Console.ReadKey();
-                                }
+                                room.checkout(customer);
                             }
+                        Console.ReadKey();
                         }
                     }
                     else if (customerMenuSelect == 3)
@@ -246,7 +244,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
+                Console.WriteLine("Invalid capacity input. Capacity should be less than 6.");
                 Console.ReadKey();
             }
         }
@@ -263,7 +261,7 @@ class Program
         if (int.TryParse(Console.ReadLine(), out int roomnumber) && roomnumber >= 100 && roomnumber <= 999)
         {
             Console.WriteLine("Enter room capacity (less than or equals to 3): ");
-            if (int.TryParse(Console.ReadLine(), out int capacity) && capacity < 3)
+            if (int.TryParse(Console.ReadLine(), out int capacity) && capacity <= 3)
             {
                 Console.WriteLine("Enter room price (less than or equals to 250): ");
                 if (int.TryParse(Console.ReadLine(), out int price) && price <= 250)
@@ -281,7 +279,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("Invalid capacity input. Capacity should be less than 8.");
+                Console.WriteLine("Invalid capacity input. Capacity should be less than 3.");
                 Console.ReadKey();
             }
         }
