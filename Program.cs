@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using CustomerManagement;
 using HotelDisplay;
@@ -119,7 +120,7 @@ class Program
                                     {
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
-                                            //rooms[i].AddCustomer(guest);
+                                            rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
                                             Console.ReadKey();
@@ -152,14 +153,13 @@ class Program
                                     {
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
-                                            //rooms[i].AddCustomer(guest);
+                                            rooms[i].AddCustomer(guest);
                                             Console.WriteLine("Here's the total for the customer's stay");
                                             Console.WriteLine(guest.Billing());
                                             Console.ReadKey();
                                             break;
                                         }
                                     }
-                                    Console.ReadKey();
                                 }
                             }
                         }
