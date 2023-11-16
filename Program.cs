@@ -57,6 +57,7 @@ class Program
         }
     }
 
+    // Method to display a menu with a specified selected option
     static void DisplayMenu(List<string> options, int selectedOption)
     {
         for (int i = 0; i < options.Count; i++)
@@ -76,11 +77,14 @@ class Program
     {
         int customerMenuSelect = 1;
 
+        // List of options for the customer menu
         List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out","Make a review", "Show reviews", "Show Customers", "Back" };
 
         while (true)
         {
             Console.Clear();
+
+            // Display the customer menu
             DisplayMenu(customerOptions, customerMenuSelect);
 
             ConsoleKeyInfo customerKey = Console.ReadKey();
@@ -356,39 +360,8 @@ class Program
                     return;
                 }
             }
+            // Save data to JSON files after each room menu action
             JsonHandler.SaveCustomersAndRooms();
         }
-    }
-}
-
-public static class JsonHandler
-{
-    public static void SaveCustomersAndRooms()
-    {
-        SaveToJson("customers.json", Program.customers);
-        SaveToJson("rooms.json", Program.rooms);
-    }
-
-    public static void LoadCustomersAndRooms()
-    {
-        Program.customers = LoadFromJson<Customer>("customers.json");
-        Program.rooms = LoadFromJson<Room>("rooms.json");
-    }
-
-    public static void SaveToJson<T>(string filePath, List<T> data)
-    {
-        string jsonData = JsonSerializer.Serialize(data);
-        File.WriteAllText(filePath, jsonData);
-    }
-
-    public static List<T> LoadFromJson<T>(string filePath)
-    {
-        if (File.Exists(filePath))
-        {
-            string jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<T>>(jsonData);
-        }
-
-        return new List<T>();
     }
 }

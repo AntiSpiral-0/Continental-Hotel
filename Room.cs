@@ -58,6 +58,7 @@ namespace CustomerManagement
             Customers.Add(customer);
         }
 
+        // Virtual method for customer check-in
         public virtual bool checkin(Customer customer)
         {
             if (isoccupied || Customers.Count < capacity)
@@ -70,6 +71,7 @@ namespace CustomerManagement
             return false;
         }
 
+        // Virtual method for customer check-out
         public virtual void checkout(Customer customer)
         {
             if (Customers.Contains(customer))
@@ -85,11 +87,12 @@ namespace CustomerManagement
         }
 }
 
+    // Derived class representing a double room, inheriting from Room
     class DoubleRoom : Room
     {
         public DoubleRoom(int roomnumber, int capacity, bool isoccupied, List<Customer> customers, double price) : base(roomnumber, capacity, isoccupied, customers, price) { }
 
-  
+        // Override checkout and checkin methods if necessary
         public override void checkout(Customer customer)
         {
             base.checkout(customer);
@@ -101,10 +104,12 @@ namespace CustomerManagement
         }
     }
 
+    // Derived class representing a single room, inheriting from Room
     class SingleRoom : Room
     {
         public SingleRoom(int roomnumber, int capacity, bool isoccupied, List<Customer> customers, double price) : base(roomnumber, capacity, isoccupied, customers, price) { }
 
+        // Override checkout and checkin methods if necessary
         public override void checkout(Customer customer)
         {
             base.checkout(customer);

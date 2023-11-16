@@ -16,6 +16,7 @@ namespace CustomerManagement
             Rating = rating;
         }
 
+        // Method to create a new review and add it to the reviews list
         public static Review CreateReview(Customer reviewer)
         {
             Console.Write("Enter your review comment:");
@@ -28,35 +29,38 @@ namespace CustomerManagement
             }
             while (!int.TryParse(Console.ReadLine(), out rating) || rating < 1 || rating > 5);
 
+            // Create a new review with the provided details
             Review newReview = new Review(reviewer, comment, rating);
             reviewer.Reviews.Add(newReview);
 
             return newReview;
         }
     
-
-    public static double CalculateAverageRating(List<Customer> customers)
-    {
-        double totalRating = 0;
-        int reviewCount = 0;
-
-        foreach (Customer customer in customers)
+        // Method to calculate the average rating from a list of customers' reviews
+        public static double CalculateAverageRating(List<Customer> customers)
         {
-            foreach (Review review in customer.Reviews)
+            double totalRating = 0;
+            int reviewCount = 0;
+
+            // Iterate through each customer and their reviews
+            foreach (Customer customer in customers)
             {
-                totalRating += review.Rating;
-                reviewCount++;
+                foreach (Review review in customer.Reviews)
+                {
+                    totalRating += review.Rating;
+                    reviewCount++;
+                }
             }
-        }
 
-        if (reviewCount == 0)
-        {
-            return 0;
-        }
+            if (reviewCount == 0)
+            {
+                return 0;
+            }
 
-        double averageRating = (double)totalRating / reviewCount;
-        return averageRating;
+            // Calculate and return the average rating
+            double averageRating = (double)totalRating / reviewCount;
+            return averageRating;
+        }
     }
-}
 }
 
