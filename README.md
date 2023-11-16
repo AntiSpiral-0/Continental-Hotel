@@ -1,2 +1,2 @@
 # Continental-Hotel
-Pontus please do the json files 
+I did comment on stuff
