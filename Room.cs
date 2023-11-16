@@ -6,7 +6,7 @@ namespace CustomerManagement
     class Room 
     {
         private int roomnumber;
-        public static int capacity;
+        public int capacity;
         public List<Customer> customers;
         private bool isoccupied;
         private static double price;
@@ -23,7 +23,7 @@ namespace CustomerManagement
             set { roomnumber = value; }
         }
 
-        public static int Capacity
+        public int Capacity
         {
             get { return capacity; }
             set { capacity = value; }

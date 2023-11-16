@@ -33,8 +33,17 @@ namespace HotelDisplay
         {
             foreach (Customer c in r.customers)
             {
-                Console.WriteLine($"Name: {c.Name} CustomerId: {c.CustomerId} Contact: {c.Contact} Days: {c.Days} Discount: {c.Discount}");
+                Console.WriteLine($"Name: {c.Name} CustomerId: {c.CustomerId} Contact: {c.Contact}");
+                if(c is NormalGuest normalGuest)
+                {
+                    Console.WriteLine($"Days : {normalGuest.Days} Discount : {normalGuest.Discount}");
+                }
+                else if(c is VIPGuest vIPGuest)
+                {
+                    Console.WriteLine($"Days : {vIPGuest.Days} Discount : {vIPGuest.Discount}");
+                }
             }
+
         }
     }
 
