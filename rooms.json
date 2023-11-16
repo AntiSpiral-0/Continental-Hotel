@@ -1,1 +1,1 @@
-[{"Customers":[],"Roomnumber":111,"Capacity":3,"Isoccupied":false}]
+[{"Customers":[{"CustomerId":1111,"Name":"yassine","Contact":11223344,"Reviews":[]}],"Roomnumber":111,"Capacity":3,"Isoccupied":true}]

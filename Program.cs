@@ -78,7 +78,7 @@ class Program
         int customerMenuSelect = 1;
 
         // List of options for the customer menu
-        List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out","Make a review", "Show reviews", "Show Customers", "Back" };
+        List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out", "Make a review", "Show reviews", "Show Customers", "Back" };
 
         while (true)
         {
@@ -125,7 +125,7 @@ class Program
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
                                             Console.WriteLine("Here's the total for the customer's stay");
-                                            Console.WriteLine(guest.Billing(days , 1));
+                                            Console.WriteLine(guest.Billing(days, 1));
                                             Console.ReadKey();
                                             break;
                                         }
@@ -157,7 +157,7 @@ class Program
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
                                             Console.WriteLine("Here's the total for the customer's stay");
-                                            Console.WriteLine(guest.Billing(days , 0.2));
+                                            Console.WriteLine(guest.Billing(days, 0.2));
                                             Console.ReadKey();
                                             break;
                                         }
@@ -168,53 +168,53 @@ class Program
                     }
                 }
 
-            
-                    else if (customerMenuSelect == 2)
+
+                else if (customerMenuSelect == 2)
+                {
+                    Console.WriteLine("Choose the customer checking out");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    foreach (Room room in rooms)
                     {
-                        Console.WriteLine("Choose the customer checking out");
-                        int id = Convert.ToInt32(Console.ReadLine());
-                        foreach(Room room in rooms)
+                        foreach (Customer customer in customers)
                         {
-                            foreach(Customer customer in customers)
-                            {
-                                if (id == customer.CustomerId)
+                            if (id == customer.CustomerId)
                                 room.checkout(customer);
-                            }
-                        Console.ReadKey();
                         }
+                        Console.ReadKey();
                     }
-                    else if (customerMenuSelect == 3)
+                }
+                else if (customerMenuSelect == 3)
+                {
+                    Console.WriteLine("Specify Which Customer is making the review");
+                    int Reviewer = Convert.ToInt32(Console.ReadLine());
+                    foreach (Room room in rooms)
                     {
-                        Console.WriteLine("Specify Which Customer is making the review");
-                        int Reviewer = Convert.ToInt32(Console.ReadLine());
-                        foreach(Room room in rooms)
+                        foreach (Customer customer in customers)
                         {
-                            foreach(Customer customer in customers)
+                            if (Reviewer == customer.CustomerId)
                             {
-                                if(Reviewer == customer.CustomerId)
-                                {
-                                    Console.WriteLine("Write the review here");
-                                    Review.CreateReview(customer);
-                                }
+                                Console.WriteLine("Write the review here");
+                                Review.CreateReview(customer);
                             }
+                        }
                         Console.WriteLine("Average review of the hotel is");
                         Console.WriteLine(Review.CalculateAverageRating(room.Customers));
-                        }
                     }
-                    else if (customerMenuSelect == 4)
-                    {
-                        Hotel.ShowReviews(customers);
-                        Console.ReadKey();
-                    }
-                    else if (customerMenuSelect == 5)
-                    {
-                        Hotel.ShowCustomers(rooms);
-                        Console.ReadKey();
-                    }
-                    else if (customerMenuSelect == 6)
-                    {
-                        return;
-                    }
+                }
+                else if (customerMenuSelect == 4)
+                {
+                    Hotel.ShowReviews(customers);
+                    Console.ReadKey();
+                }
+                else if (customerMenuSelect == 5)
+                {
+                    Hotel.ShowCustomers(rooms);
+                    Console.ReadKey();
+                }
+                else if (customerMenuSelect == 6)
+                {
+                    return;
+                }
             }
         }
     }
@@ -239,7 +239,7 @@ class Program
                 {
                     Console.WriteLine("Invalid price input. Price should be less than 500.");
                     Console.ReadKey();
-                    
+
                 }
             }
             else
@@ -349,14 +349,14 @@ class Program
                         foreach (Customer customer in room.Customers)
                         {
                             Console.WriteLine($"   Name: {customer.Name}, Contact: {customer.Contact}");
-                           
+
                         }
                     }
                     Console.ReadKey();
                 }
                 else if (RoomMenuSelect == 4)
                 {
-                    
+
                     return;
                 }
             }

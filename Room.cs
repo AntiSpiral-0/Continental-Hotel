@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CustomerManagement
 {
-    class Room 
+    class Room
     {
         private int roomnumber;
         public int capacity;
@@ -85,7 +85,7 @@ namespace CustomerManagement
                 return;
             }
         }
-}
+    }
 
     // Derived class representing a double room, inheriting from Room
     class DoubleRoom : Room

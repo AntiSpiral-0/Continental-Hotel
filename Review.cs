@@ -35,7 +35,7 @@ namespace CustomerManagement
 
             return newReview;
         }
-    
+
         // Method to calculate the average rating from a list of customers' reviews
         public static double CalculateAverageRating(List<Customer> customers)
         {
