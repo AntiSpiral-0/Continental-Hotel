@@ -27,27 +27,29 @@ namespace HotelDisplay
             Location = location;
         }
 
-    public static void ShowCustomers(List<Room> rooms)
-    {
-        foreach (Room r in rooms)
+        // Method to show customers in the provided list of rooms
+        public static void ShowCustomers(List<Room> rooms)
         {
-            foreach (Customer c in r.customers)
+            foreach (Room r in rooms)
             {
-                Console.WriteLine($"Name: {c.Name} CustomerId: {c.CustomerId} Contact: {c.Contact} Days: {c.Days} Discount: {c.Discount}");
+                foreach (Customer c in r.customers)
+                {
+                    Console.WriteLine($"Name: {c.Name} CustomerId: {c.CustomerId} Contact: {c.Contact} Days: {c.Days} Discount: {c.Discount}");
+                }
             }
         }
-    }
 
-    public static void ShowReviews(List<Customer> customers)
-    {
-        foreach (Customer customer in customers)
+        // Method to show reviews for the provided list of customers
+        public static void ShowReviews(List<Customer> customers)
         {
-            foreach (Review review in customer.Reviews)
+            foreach (Customer customer in customers)
             {
-                Console.WriteLine($"the reviewer :{review.Reviewer.Name} Comment : {review.Comment} Rating : {review.Rating}");
+                foreach (Review review in customer.Reviews)
+                {
+                    Console.WriteLine($"the reviewer :{review.Reviewer.Name} Comment : {review.Comment} Rating : {review.Rating}");
+                }
             }
         }
-    }
     }
     
 }

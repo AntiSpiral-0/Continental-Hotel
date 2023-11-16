@@ -57,6 +57,7 @@ class Program
         }
     }
 
+    // Method to display a menu with a specified selected option
     static void DisplayMenu(List<string> options, int selectedOption)
     {
         for (int i = 0; i < options.Count; i++)
@@ -76,11 +77,14 @@ class Program
     {
         int customerMenuSelect = 1;
 
+        // List of options for the customer menu
         List<string> customerOptions = new List<string> { "Customer Menu:", "Check in", "Check out","Make a review", "Show reviews", "Show Customers", "Back" };
 
         while (true)
         {
             Console.Clear();
+
+            // Display the customer menu
             DisplayMenu(customerOptions, customerMenuSelect);
 
             ConsoleKeyInfo customerKey = Console.ReadKey();
@@ -356,6 +360,7 @@ class Program
                     return;
                 }
             }
+            // Save data to JSON files after each room menu action
             JsonHandler.SaveCustomersAndRooms();
         }
     }

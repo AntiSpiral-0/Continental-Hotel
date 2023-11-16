@@ -25,6 +25,7 @@ namespace CustomerManagement
                     Console.WriteLine("Enter the number of days");
                     if (int.TryParse(Console.ReadLine(), out int days) && days <= 365)
                     {
+                        // Determine discount based on customer type
                         double discount = (customerType == "NORMAL") ? 1 : 0.2;
                         Customer guest;
 
@@ -37,8 +38,10 @@ namespace CustomerManagement
                             guest = new VIPGuest(custId, name, cont, new List<Review>(), days, discount);
                         }
 
+                        // Add customer to the list
                         customers.Add(guest);
-
+                        
+                        // Check in the customer to the selected room
                         Console.WriteLine("Please Choose a room");
                         int roomid = Convert.ToInt32(Console.ReadLine());
 
@@ -129,7 +132,7 @@ namespace CustomerManagement
         }
     }
 
-    
+    // Class representing a VIP guest, inherits from Customer
     class VIPGuest : Customer
     {
         public VIPGuest(int customerId, string name, int contact, List<Review> reviews, int days, double discount) : base(customerId, name, contact, reviews, days, discount) { }
@@ -140,6 +143,7 @@ namespace CustomerManagement
         }
     }
 
+    // Class representing a normal guest, inherits from Customer
     class NormalGuest : Customer
     {
         public NormalGuest(int customerId, string name, int contact, List<Review> reviews, int days, double discount) : base(customerId, name, contact, reviews, days, discount) { }
@@ -149,35 +153,37 @@ namespace CustomerManagement
             return base.Billing();
         }
     }
+
+    // Static class for handling JSON serialization and deserialization
     public static class JsonHandler
-{
-    public static void SaveCustomersAndRooms()
     {
-        SaveToJson("customers.json", Program.customers);
-        SaveToJson("rooms.json", Program.rooms);
-    }
-
-    public static void LoadCustomersAndRooms()
-    {
-        Program.customers = LoadFromJson<Customer>("customers.json");
-        Program.rooms = LoadFromJson<Room>("rooms.json");
-    }
-
-    public static void SaveToJson<T>(string filePath, List<T> data)
-    {
-        string jsonData = JsonSerializer.Serialize(data);
-        File.WriteAllText(filePath, jsonData);
-    }
-
-    public static List<T> LoadFromJson<T>(string filePath)
-    {
-        if (File.Exists(filePath))
+        public static void SaveCustomersAndRooms()
         {
-            string jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<T>>(jsonData);
+            SaveToJson("customers.json", Program.customers);
+            SaveToJson("rooms.json", Program.rooms);
         }
 
-        return new List<T>();
+        public static void LoadCustomersAndRooms()
+        {
+            Program.customers = LoadFromJson<Customer>("customers.json");
+            Program.rooms = LoadFromJson<Room>("rooms.json");
+        }
+
+        public static void SaveToJson<T>(string filePath, List<T> data)
+        {
+            string jsonData = JsonSerializer.Serialize(data);
+            File.WriteAllText(filePath, jsonData);
+        }
+
+        public static List<T> LoadFromJson<T>(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
+                return JsonSerializer.Deserialize<List<T>>(jsonData);
+            }
+
+            return new List<T>();
+        }
     }
-}
 }
