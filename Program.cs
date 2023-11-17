@@ -111,7 +111,7 @@ class Program
                         if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
                         {
                             Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont >= 10000000)
+                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 9999999999 && cont >= 1000000000)
                             {
                                 Console.WriteLine("Enter the number of days");
                                 if (int.TryParse(Console.ReadLine(), out int days) && days <= 365)
@@ -142,8 +142,8 @@ class Program
                         Console.WriteLine("Enter Customer ID (4 digits): ");
                         if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
                         {
-                            Console.WriteLine("Enter contact number");
-                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 99999999 && cont >= 10000000)
+                            Console.WriteLine("Enter contact number / 10 digits required");
+                            if (int.TryParse(Console.ReadLine(), out int cont) && cont <= 9999999999 && cont >= 1000000000)
                             {
                                 Console.WriteLine("Enter the number of days");
                                 if (int.TryParse(Console.ReadLine(), out int days) && days < 365)
