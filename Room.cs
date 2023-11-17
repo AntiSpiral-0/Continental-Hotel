@@ -6,7 +6,7 @@ namespace CustomerManagement
     class Room
     {
         private int roomnumber;
-        public int capacity;
+        private int capacity;
         public List<Customer> customers;
         private bool isoccupied;
         private static double price;

@@ -199,6 +199,7 @@ class Program
                         }
                         Console.WriteLine("Average review of the hotel is");
                         Console.WriteLine(Review.CalculateAverageRating(room.Customers));
+                        Console.ReadKey();
                     }
                 }
                 else if (customerMenuSelect == 4)
