@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace CustomerManagement
@@ -37,6 +38,13 @@ namespace CustomerManagement
             get { return reviews; }
             set { reviews = value; }
         }
+        public Customer()
+        {
+            CustomerId = 0;
+            Name = "";
+            Contact = 0;
+            reviews = new List<Review>();
+        }
         public Customer(int customerId, string name, int contact, List<Review> review)
         {
             CustomerId = customerId;
@@ -50,12 +58,12 @@ namespace CustomerManagement
         }
 
 
-        public virtual double Billing(int y, double z)
+        public virtual double Billing(int y, double z, double p)
         {
             double x = 0;
             for (int i = 0; i < y; i++)
             {
-                x += Room.Price;
+                x += p;
             }
             x = x * z;
             return x;
@@ -82,9 +90,9 @@ namespace CustomerManagement
             this.Days = days;
             this.Discount = discount;
         }
-        public override double Billing(int y, double z)
+        public override double Billing(int y, double z, double p)
         {
-            return base.Billing(Days, Discount);
+            return base.Billing(Days, Discount, p);
         }
     }
 
@@ -108,9 +116,9 @@ namespace CustomerManagement
             this.Days = days;
             this.Discount = discount;
         }
-        public override double Billing(int y, double z)
+        public override double Billing(int y, double z, double p)
         {
-            return base.Billing(Days, Discount);
+            return base.Billing(Days, Discount, p);
         }
     }
 
@@ -139,8 +147,17 @@ namespace CustomerManagement
         {
             if (File.Exists(filePath))
             {
+                try
+                {
                 string jsonData = File.ReadAllText(filePath);
-                return JsonSerializer.Deserialize<List<T>>(jsonData);
+                var options = new JsonSerializerOptions { IncludeFields = true };
+                return JsonSerializer.Deserialize<List<T>>(jsonData, options);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadKey();
+                }
             }
 
             return new List<T>();

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace CustomerManagement
 {
+    
     class Room
     {
         private int roomnumber;
         private int capacity;
         public List<Customer> customers;
         private bool isoccupied;
-        private static double price;
+        private double price;
 
         public List<Customer> Customers
         {
@@ -29,7 +30,7 @@ namespace CustomerManagement
             set { capacity = value; }
         }
 
-        public static double Price
+        public double Price
         {
             get { return price; }
             set { price = value; }
@@ -40,7 +41,15 @@ namespace CustomerManagement
             get { return isoccupied; }
             set { isoccupied = value; }
         }
-
+        
+        public Room()
+        {
+            Roomnumber = 0;
+            Price = 0;
+            Capacity = 0;
+            Isoccupied = false;
+            customers = new List<Customer>();
+        }
         public Room(int roomnumber, int capacity, bool isoccupied, List<Customer> customer, double price)
         {
             Roomnumber = roomnumber;

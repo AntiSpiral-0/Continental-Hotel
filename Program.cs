@@ -125,7 +125,7 @@ class Program
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
                                             Console.WriteLine("Here's the total for the customer's stay");
-                                            Console.WriteLine(guest.Billing(days, 1));
+                                            Console.WriteLine(guest.Billing(days, 1, rooms[i].Price));
                                             Console.ReadKey();
                                             break;
                                         }
@@ -157,7 +157,7 @@ class Program
                                         if (rooms[i].Roomnumber == roomid && rooms[i].checkin(guest))
                                         {
                                             Console.WriteLine("Here's the total for the customer's stay");
-                                            Console.WriteLine(guest.Billing(days, 0.2));
+                                            Console.WriteLine(guest.Billing(days, 0.8, rooms[i].Price));
                                             Console.ReadKey();
                                             break;
                                         }
@@ -222,79 +222,117 @@ class Program
 
     static void AddDoubleRoom(List<Room> rooms)
     {
-        Console.WriteLine("Enter room number (3 digits): ");
-        if (int.TryParse(Console.ReadLine(), out int roomnumber) && roomnumber >= 100 && roomnumber <= 999)
-        {
-            Console.WriteLine("Enter room capacity (less than or equals to 6): ");
-            if (int.TryParse(Console.ReadLine(), out int capacity) && capacity <= 6)
-            {
-                Console.WriteLine("Enter room price (less than 500): ");
-                if (int.TryParse(Console.ReadLine(), out int price) && price <= 500)
-                {
-                    DoubleRoom newRoom = new DoubleRoom(roomnumber, capacity, false, new List<Customer>(), price);
-                    rooms.Add(newRoom);
-                    Console.WriteLine("Room added successfully.");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid price input. Price should be less than 500.");
-                    Console.ReadKey();
+        int price = -1;
+        int roomnumber = -1;
+        int capacity = -1;
 
-                }
+        bool validroomnumber = false;
+        while (!validroomnumber)
+        {
+            Console.WriteLine("Enter room number (3 digits): ");
+            if (int.TryParse(Console.ReadLine(), out roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+            {
+                validroomnumber = true;
             }
             else
             {
-                Console.WriteLine("Invalid capacity input. Capacity should be less than 6.");
-                Console.ReadKey();
+                Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+                
             }
         }
-        else
+        bool validcapacity = false;
+        while (!validcapacity)
         {
-            Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
-            Console.ReadKey();
+            Console.WriteLine("Enter room capacity (less than or equals to 6): ");
+            if (int.TryParse(Console.ReadLine(), out capacity) && capacity <= 6)
+            {
+                validcapacity = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid capacity input. Capacity should be less than or equals 6.");
+                
+            }
         }
+        bool validprice = false;
+        while (!validprice)
+        {
+            Console.WriteLine("Enter room price (less than or equals to 500): ");
+            if (int.TryParse(Console.ReadLine(), out price) && price <= 500)
+            {
+                validprice = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid price input. Price should be less than 500.");
+                
+            }
+        }
+        DoubleRoom newRoom = new DoubleRoom(roomnumber, capacity, false, new List<Customer>(), price);
+        rooms.Add(newRoom);
+        Console.WriteLine("Room added successfully.");
+        Console.ReadKey();
     }
+
 
     static void AddSingleRoom(List<Room> rooms)
     {
-        Console.WriteLine("Enter room number (3 digits): ");
-        if (int.TryParse(Console.ReadLine(), out int roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+        int price = -1;
+        int roomnumber = -1;
+        int capacity = -1;
+
+        bool validroomnumber = false;
+        while (!validroomnumber)
+        {
+            Console.WriteLine("Enter room number (3 digits): ");
+            if (int.TryParse(Console.ReadLine(), out roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+            {
+                validroomnumber = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+                
+            }
+        }
+        bool validcapacity = false;
+        while (!validcapacity)
         {
             Console.WriteLine("Enter room capacity (less than or equals to 3): ");
-            if (int.TryParse(Console.ReadLine(), out int capacity) && capacity <= 3)
+            if (int.TryParse(Console.ReadLine(), out capacity) && capacity <= 3)
             {
-                Console.WriteLine("Enter room price (less than or equals to 250): ");
-                if (int.TryParse(Console.ReadLine(), out int price) && price <= 250)
-                {
-                    SingleRoom newRoom = new SingleRoom(roomnumber, capacity, false, new List<Customer>(), price);
-                    rooms.Add(newRoom);
-                    Console.WriteLine("Room added successfully.");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.WriteLine("Invalid price input. Price should be less than 500.");
-                    Console.ReadKey();
-                }
+                validcapacity = true;
             }
             else
             {
                 Console.WriteLine("Invalid capacity input. Capacity should be less than 3.");
-                Console.ReadKey();
+                
             }
         }
-        else
+        bool validprice = false;
+        while (!validprice)
         {
-            Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
-            Console.ReadKey();
+            Console.WriteLine("Enter room price (less than or equals to 250): ");
+            if (int.TryParse(Console.ReadLine(), out price) && price <= 250)
+            {
+                validprice = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid price input. Price should be less than 250.");
+                
+            }
         }
+        SingleRoom newRoom = new SingleRoom(roomnumber, capacity, false, new List<Customer>(), price);
+        rooms.Add(newRoom);
+        Console.WriteLine("Room added successfully.");
+        Console.ReadKey();
     }
 
     static void RoomMenu()
     {
         int RoomMenuSelect = 1;
-        List<string> RoomOptions = new List<string> { "Rooms Options", "Add a Room", "Remove a Room", "Show Rooms", "Quit" };
+        List<string> RoomOptions = new List<string> { "Rooms Options", "Add a Room", "Remove a Room", "Show Rooms", "Back" };
 
         while (true)
         {
@@ -314,15 +352,23 @@ class Program
             {
                 if (RoomMenuSelect == 1)
                 {
-                    Console.WriteLine("Select Normal if you want a Normal Room Or Double if you want a Double Room");
-                    string choice = Console.ReadLine();
-                    if (choice.ToUpper() == "DOUBLE")
+                    string choice = "";
+                    while (choice.ToUpper() != "DOUBLE" && choice.ToUpper() != "NORMAL")
                     {
-                        AddDoubleRoom(rooms);
-                    }
-                    else if (choice.ToUpper() == "NORMAL")
-                    {
-                        AddSingleRoom(rooms);
+                        Console.WriteLine("Select Normal if you want a Normal Room Or Double if you want a Double Room");
+                        choice = Console.ReadLine();
+                        if (choice.ToUpper() == "DOUBLE")
+                        {
+                            AddDoubleRoom(rooms);
+                        }
+                        else if (choice.ToUpper() == "NORMAL")
+                        {
+                            AddSingleRoom(rooms);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid room type!");
+                        }
                     }
                 }
                 else if (RoomMenuSelect == 2)
@@ -345,7 +391,15 @@ class Program
                     foreach (Room room in rooms)
                     {
                         Console.WriteLine($"RoomNumber: {room.Roomnumber}, Occupancy: {room.Isoccupied}");
-                        Console.WriteLine("Customers:");
+                        if (room.Customers.Count == 0)
+                        {
+                            Console.WriteLine("This room is not booked by any customer.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Customers:");
+                        }
+
 
                         foreach (Customer customer in room.Customers)
                         {
