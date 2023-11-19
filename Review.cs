@@ -5,6 +5,7 @@ namespace CustomerManagement
 {
     class Review
     {
+        // Properties for review details.
         public Customer Reviewer { get; set; }
         public string Comment { get; set; }
         public int Rating { get; set; }

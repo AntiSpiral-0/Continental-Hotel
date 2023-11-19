@@ -6,6 +6,7 @@ namespace CustomerManagement
     
     class Room
     {
+        // Properties for room details
         private int roomnumber;
         private int capacity;
         public List<Customer> customers;

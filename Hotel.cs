@@ -6,6 +6,7 @@ namespace HotelDisplay
 {
     class Hotel
     {
+        // Properties for hotel details.
         public string name;
         public string location;
 

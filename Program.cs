@@ -10,7 +10,7 @@ using HotelDisplay;
 
 class Program
 {
-
+    // Lists to store customer, room, and review data
     public static List<Customer> customers = new List<Customer>();
     public static List<Room> rooms = new List<Room>();
     static List<Review> reviews = new List<Review>();
@@ -18,8 +18,10 @@ class Program
 
     static void Main()
     {
+        // Load customer and room data from JSON files.
         JsonHandler.LoadCustomersAndRooms();
 
+        // Variables for handling menu navigation
         int menuSelect = 1;
         List<string> options = new List<string> { "Select an Option:", "Customer", "Rooms", "Quit" };
 
@@ -30,6 +32,7 @@ class Program
 
             ConsoleKeyInfo theKey = Console.ReadKey();
 
+            // Handle user input for menu navigation
             if (theKey.Key == ConsoleKey.DownArrow)
             {
                 menuSelect = Math.Min(menuSelect + 1, options.Count - 1);
@@ -40,6 +43,7 @@ class Program
             }
             else if (theKey.Key == ConsoleKey.Enter)
             {
+                // Execute corresponding action based on the selected menu option
                 if (menuSelect == 1)
                 {
                     CustomerMenu();
@@ -50,6 +54,7 @@ class Program
                 }
                 else if (menuSelect == 3)
                 {
+                    // Save data to JSON files and exit the program
                     JsonHandler.SaveCustomersAndRooms();
                     return;
                 }
@@ -72,7 +77,7 @@ class Program
             }
         }
     }
-
+    // Method to handle customer-related actions.
     static void CustomerMenu()
     {
         int customerMenuSelect = 1;
@@ -220,6 +225,7 @@ class Program
         }
     }
 
+    // Method to add a double room to the list of rooms
     static void AddDoubleRoom(List<Room> rooms)
     {
         int price = -1;
@@ -274,7 +280,7 @@ class Program
         Console.ReadKey();
     }
 
-
+    // Method to add a single room to the list of rooms
     static void AddSingleRoom(List<Room> rooms)
     {
         int price = -1;
@@ -328,7 +334,7 @@ class Program
         Console.WriteLine("Room added successfully.");
         Console.ReadKey();
     }
-
+    // Method to handle room-related actions
     static void RoomMenu()
     {
         int RoomMenuSelect = 1;
