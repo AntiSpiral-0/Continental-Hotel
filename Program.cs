@@ -224,6 +224,97 @@ class Program
             }
         }
     }
+    // Method to handle room-related actions
+    static void RoomMenu()
+    {
+        int RoomMenuSelect = 1;
+        List<string> RoomOptions = new List<string> { "Rooms Options", "Add a Room", "Remove a Room", "Show Rooms", "Back" };
+
+        while (true)
+        {
+            Console.Clear();
+            DisplayMenu(RoomOptions, RoomMenuSelect);
+            ConsoleKeyInfo RoomKey = Console.ReadKey();
+
+            if (RoomKey.Key == ConsoleKey.DownArrow)
+            {
+                RoomMenuSelect = Math.Min(RoomMenuSelect + 1, RoomOptions.Count - 1);
+            }
+            else if (RoomKey.Key == ConsoleKey.UpArrow)
+            {
+                RoomMenuSelect = Math.Max(RoomMenuSelect - 1, 1);
+            }
+            else if (RoomKey.Key == ConsoleKey.Enter)
+            {
+                if (RoomMenuSelect == 1)
+                {
+                    string choice = "";
+                    while (choice.ToUpper() != "DOUBLE" && choice.ToUpper() != "NORMAL")
+                    {
+                        Console.WriteLine("Select Normal if you want a Normal Room Or Double if you want a Double Room");
+                        choice = Console.ReadLine();
+                        if (choice.ToUpper() == "DOUBLE")
+                        {
+                            AddDoubleRoom(rooms);
+                        }
+                        else if (choice.ToUpper() == "NORMAL")
+                        {
+                            AddSingleRoom(rooms);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid room type!");
+                        }
+                    }
+                }
+                else if (RoomMenuSelect == 2)
+                {
+                    Console.WriteLine("Please Write the number of the room you would like to remove");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    foreach (Room room in rooms)
+                    {
+                        if (room.Roomnumber == number)
+                        {
+                            rooms.Remove(room);
+                            Console.WriteLine("room removed");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
+                }
+                else if (RoomMenuSelect == 3)
+                {
+                    foreach (Room room in rooms)
+                    {
+                        Console.WriteLine($"RoomNumber: {room.Roomnumber}, Occupancy: {room.Isoccupied}");
+                        if (room.Customers.Count == 0)
+                        {
+                            Console.WriteLine("This room is not booked by any customer.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Customers:");
+                        }
+
+
+                        foreach (Customer customer in room.Customers)
+                        {
+                            Console.WriteLine($"   Name: {customer.Name}, Contact: {customer.Contact}");
+
+                        }
+                    }
+                    Console.ReadKey();
+                }
+                else if (RoomMenuSelect == 4)
+                {
+
+                    return;
+                }
+            }
+            // Save data to JSON files after each room menu action
+            JsonHandler.SaveCustomersAndRooms();
+        }
+    }
 
     // Method to add a double room to the list of rooms
     static void AddDoubleRoom(List<Room> rooms)
@@ -333,96 +424,5 @@ class Program
         rooms.Add(newRoom);
         Console.WriteLine("Room added successfully.");
         Console.ReadKey();
-    }
-    // Method to handle room-related actions
-    static void RoomMenu()
-    {
-        int RoomMenuSelect = 1;
-        List<string> RoomOptions = new List<string> { "Rooms Options", "Add a Room", "Remove a Room", "Show Rooms", "Back" };
-
-        while (true)
-        {
-            Console.Clear();
-            DisplayMenu(RoomOptions, RoomMenuSelect);
-            ConsoleKeyInfo RoomKey = Console.ReadKey();
-
-            if (RoomKey.Key == ConsoleKey.DownArrow)
-            {
-                RoomMenuSelect = Math.Min(RoomMenuSelect + 1, RoomOptions.Count - 1);
-            }
-            else if (RoomKey.Key == ConsoleKey.UpArrow)
-            {
-                RoomMenuSelect = Math.Max(RoomMenuSelect - 1, 1);
-            }
-            else if (RoomKey.Key == ConsoleKey.Enter)
-            {
-                if (RoomMenuSelect == 1)
-                {
-                    string choice = "";
-                    while (choice.ToUpper() != "DOUBLE" && choice.ToUpper() != "NORMAL")
-                    {
-                        Console.WriteLine("Select Normal if you want a Normal Room Or Double if you want a Double Room");
-                        choice = Console.ReadLine();
-                        if (choice.ToUpper() == "DOUBLE")
-                        {
-                            AddDoubleRoom(rooms);
-                        }
-                        else if (choice.ToUpper() == "NORMAL")
-                        {
-                            AddSingleRoom(rooms);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid room type!");
-                        }
-                    }
-                }
-                else if (RoomMenuSelect == 2)
-                {
-                    Console.WriteLine("Please Write the number of the room you would like to remove");
-                    int number = Convert.ToInt32(Console.ReadLine());
-                    foreach (Room room in rooms)
-                    {
-                        if (room.Roomnumber == number)
-                        {
-                            rooms.Remove(room);
-                            Console.WriteLine("room removed");
-                            Console.ReadKey();
-                            break;
-                        }
-                    }
-                }
-                else if (RoomMenuSelect == 3)
-                {
-                    foreach (Room room in rooms)
-                    {
-                        Console.WriteLine($"RoomNumber: {room.Roomnumber}, Occupancy: {room.Isoccupied}");
-                        if (room.Customers.Count == 0)
-                        {
-                            Console.WriteLine("This room is not booked by any customer.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Customers:");
-                        }
-
-
-                        foreach (Customer customer in room.Customers)
-                        {
-                            Console.WriteLine($"   Name: {customer.Name}, Contact: {customer.Contact}");
-
-                        }
-                    }
-                    Console.ReadKey();
-                }
-                else if (RoomMenuSelect == 4)
-                {
-
-                    return;
-                }
-            }
-            // Save data to JSON files after each room menu action
-            JsonHandler.SaveCustomersAndRooms();
-        }
     }
 }
