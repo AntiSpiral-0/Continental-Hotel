@@ -27,6 +27,10 @@ class Program
         {
             Console.Clear();
             DisplayMenu(options, menuSelect);
+            Console.WriteLine("╔════════════════════════╗");
+            Console.WriteLine("    Continental Hotel     ");
+            Console.WriteLine("╚════════════════════════╝");
+            Console.WriteLine("Welcome to the continental hotel ! please choose an option.");
 
             ConsoleKeyInfo theKey = Console.ReadKey();
 
@@ -137,7 +141,7 @@ class Program
                     }
                     else
                     {
-                        Console.WriteLine("Write the name of the customer Normal/VIP");
+                        Console.WriteLine("Write the name of the customer");
                         string Name = Console.ReadLine();
                         Console.WriteLine("Enter Customer ID (4 digits): ");
                         if (int.TryParse(Console.ReadLine(), out int custId) && custId >= 1000 && custId <= 9999)
@@ -195,6 +199,7 @@ class Program
                             {
                                 Console.WriteLine("Write the review here");
                                 Review.CreateReview(customer);
+                                break;
                             }
                         }
                         Console.WriteLine("Average review of the hotel is");
@@ -273,7 +278,7 @@ class Program
         Console.WriteLine("Room added successfully.");
         Console.ReadKey();
     }
-
+//add a single room
 
     static void AddSingleRoom(List<Room> rooms)
     {
@@ -415,8 +420,7 @@ class Program
                     return;
                 }
             }
-            // Save data to JSON files after each room menu action
-            JsonHandler.SaveCustomersAndRooms();
+         JsonHandler.SaveCustomersAndRooms();   
         }
     }
 }
