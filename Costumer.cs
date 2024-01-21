@@ -9,7 +9,7 @@ namespace CustomerManagement
 {
     class Customer
     {
-
+        // Properties for customer details.
         private int customerId;
         private string name;
         private int contact;
@@ -57,7 +57,7 @@ namespace CustomerManagement
             }
         }
 
-
+        // Method to calculate billing for a customer.
         public virtual double Billing(int y, double z, double p)
         {
             double x = 0;

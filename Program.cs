@@ -10,7 +10,7 @@ using HotelDisplay;
 
 class Program
 {
-
+    // Lists to store customer, room, and review data
     public static List<Customer> customers = new List<Customer>();
     public static List<Room> rooms = new List<Room>();
     static List<Review> reviews = new List<Review>();
@@ -18,8 +18,10 @@ class Program
 
     static void Main()
     {
+        // Load customer and room data from JSON files.
         JsonHandler.LoadCustomersAndRooms();
 
+        // Variables for handling menu navigation
         int menuSelect = 1;
         List<string> options = new List<string> { "Select an Option:", "Customer", "Rooms", "Quit" };
 
@@ -34,6 +36,7 @@ class Program
 
             ConsoleKeyInfo theKey = Console.ReadKey();
 
+            // Handle user input for menu navigation
             if (theKey.Key == ConsoleKey.DownArrow)
             {
                 menuSelect = Math.Min(menuSelect + 1, options.Count - 1);
@@ -44,6 +47,7 @@ class Program
             }
             else if (theKey.Key == ConsoleKey.Enter)
             {
+                // Execute corresponding action based on the selected menu option
                 if (menuSelect == 1)
                 {
                     CustomerMenu();
@@ -54,6 +58,7 @@ class Program
                 }
                 else if (menuSelect == 3)
                 {
+                    // Save data to JSON files and exit the program
                     JsonHandler.SaveCustomersAndRooms();
                     return;
                 }
@@ -76,7 +81,7 @@ class Program
             }
         }
     }
-
+    // Method to handle customer-related actions.
     static void CustomerMenu()
     {
         int customerMenuSelect = 1;
@@ -224,6 +229,7 @@ class Program
             }
         }
     }
+<<<<<<< HEAD
 
     static void AddDoubleRoom(List<Room> rooms)
     {
@@ -334,6 +340,9 @@ class Program
         Console.ReadKey();
     }
 
+=======
+    // Method to handle room-related actions
+>>>>>>> 477b7fa8f614975efa0475acf62571ba86c4cacb
     static void RoomMenu()
     {
         int RoomMenuSelect = 1;
@@ -422,5 +431,115 @@ class Program
             }
          JsonHandler.SaveCustomersAndRooms();   
         }
+    }
+
+    // Method to add a double room to the list of rooms
+    static void AddDoubleRoom(List<Room> rooms)
+    {
+        int price = -1;
+        int roomnumber = -1;
+        int capacity = -1;
+
+        bool validroomnumber = false;
+        while (!validroomnumber)
+        {
+            Console.WriteLine("Enter room number (3 digits): ");
+            if (int.TryParse(Console.ReadLine(), out roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+            {
+                validroomnumber = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+                
+            }
+        }
+        bool validcapacity = false;
+        while (!validcapacity)
+        {
+            Console.WriteLine("Enter room capacity (less than or equals to 6): ");
+            if (int.TryParse(Console.ReadLine(), out capacity) && capacity <= 6)
+            {
+                validcapacity = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid capacity input. Capacity should be less than or equals 6.");
+                
+            }
+        }
+        bool validprice = false;
+        while (!validprice)
+        {
+            Console.WriteLine("Enter room price (less than or equals to 500): ");
+            if (int.TryParse(Console.ReadLine(), out price) && price <= 500)
+            {
+                validprice = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid price input. Price should be less than 500.");
+                
+            }
+        }
+        DoubleRoom newRoom = new DoubleRoom(roomnumber, capacity, false, new List<Customer>(), price);
+        rooms.Add(newRoom);
+        Console.WriteLine("Room added successfully.");
+        Console.ReadKey();
+    }
+
+    // Method to add a single room to the list of rooms
+    static void AddSingleRoom(List<Room> rooms)
+    {
+        int price = -1;
+        int roomnumber = -1;
+        int capacity = -1;
+
+        bool validroomnumber = false;
+        while (!validroomnumber)
+        {
+            Console.WriteLine("Enter room number (3 digits): ");
+            if (int.TryParse(Console.ReadLine(), out roomnumber) && roomnumber >= 100 && roomnumber <= 999)
+            {
+                validroomnumber = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid room number input. Room number should be 3 digits.");
+                
+            }
+        }
+        bool validcapacity = false;
+        while (!validcapacity)
+        {
+            Console.WriteLine("Enter room capacity (less than or equals to 3): ");
+            if (int.TryParse(Console.ReadLine(), out capacity) && capacity <= 3)
+            {
+                validcapacity = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid capacity input. Capacity should be less than 3.");
+                
+            }
+        }
+        bool validprice = false;
+        while (!validprice)
+        {
+            Console.WriteLine("Enter room price (less than or equals to 250): ");
+            if (int.TryParse(Console.ReadLine(), out price) && price <= 250)
+            {
+                validprice = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid price input. Price should be less than 250.");
+                
+            }
+        }
+        SingleRoom newRoom = new SingleRoom(roomnumber, capacity, false, new List<Customer>(), price);
+        rooms.Add(newRoom);
+        Console.WriteLine("Room added successfully.");
+        Console.ReadKey();
     }
 }

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"CustomerId":1111,"Name":"Yassine","Contact":1234567890,"Reviews":[]}]
+=======
+[{"CustomerId":1234,"Name":"test","Contact":1035657894,"Reviews":[]},{"CustomerId":4567,"Name":"test2","Contact":1234567890,"Reviews":[]},{"CustomerId":4444,"Name":"Mosen","Contact":1234567890,"Reviews":[]}]
+>>>>>>> 477b7fa8f614975efa0475acf62571ba86c4cacb
